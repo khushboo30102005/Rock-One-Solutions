@@ -1,0 +1,11 @@
+<svg width="360" height="96" viewBox="0 0 360 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Intracia Technologies logo</title>
+  <rect width="360" height="96" rx="18" fill="white"/>
+  <rect x="31" y="26" width="58" height="44" rx="12" fill="#164F9F"/>
+  <path d="M45 48h30M60 34v28" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="88" cy="28" r="7" fill="#10A8DF"/>
+  <circle cx="32" cy="68" r="6" fill="#F35A2B"/>
+  <path d="M88 28l19-9M32 68l-14 10" stroke="#8CD8FF" stroke-width="3" stroke-linecap="round"/>
+  <text x="121" y="45" fill="#164F9F" font-family="Arial, sans-serif" font-size="26" font-weight="800">Intracia</text>
+  <text x="122" y="69" fill="#13275C" font-family="Arial, sans-serif" font-size="17" font-weight="800" letter-spacing="1.4">TECHNOLOGIES</text>
+</svg>

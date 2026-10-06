@@ -1,0 +1,1021 @@
+/* ============================================================================
+   Auto Parts CRM — case study
+
+   Editorial register: near-white ground, very large display type, generous
+   vertical air, and full-bleed dark stages so the light CRM screenshots read
+   as lit devices. Motion is restrained — scroll reveals only.
+   ========================================================================== */
+
+.cs-main {
+  --cs-gutter: max(24px, calc((100vw - 1180px) / 2));
+  --cs-wide: max(20px, calc((100vw - 1480px) / 2));
+  --cs-measure: 62ch;
+
+  --cs-paper: #fbfbf9;
+  --cs-ink: #0d0d0d;
+  --cs-body: #5a5a5a;
+  --cs-muted: #8b8b86;
+  --cs-rule: rgba(0, 0, 0, 0.11);
+  --cs-stage: #0b1220;
+
+  background: var(--cs-paper);
+  color: var(--cs-ink);
+  overflow-x: clip;
+}
+
+.cs-main h1,
+.cs-main h2,
+.cs-main h3 {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-weight: 700;
+}
+
+.cs-main section {
+  padding-inline: var(--cs-gutter);
+}
+
+/* Small uppercase label used for meta keys, tags, and the intro eyebrow. */
+.cs-eyebrow,
+.cs-tag,
+.cs-meta dt,
+.cs-stack span {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------- title + meta ---- */
+
+.cs-title-block {
+  display: grid;
+  gap: clamp(28px, 4vw, 52px);
+  padding-block: clamp(40px, 7vw, 92px) clamp(28px, 4vw, 48px);
+}
+
+.cs-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cs-muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+.cs-crumbs a:hover {
+  color: var(--cs-ink);
+}
+
+.cs-title-block h1 {
+  margin: 0;
+  max-width: 14ch;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+}
+
+.cs-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px 40px;
+  margin: 0;
+  padding-top: clamp(24px, 3vw, 40px);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-meta div {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.cs-meta dt {
+  color: var(--cs-muted);
+}
+
+.cs-meta dd {
+  margin: 0;
+  color: var(--cs-ink);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------- stages ---- */
+
+/* ===========================================================================
+   Hero: the CRM running on an angled desktop display.
+
+   Full-bleed near-black band with a glow behind the monitor, so the light CRM
+   UI reads as a lit screen — the same contrast trick the .cs-stage panels use
+   further down the page.
+   ========================================================================= */
+
+.cs-hero-media {
+  position: relative;
+  overflow: hidden;
+  padding: 0 var(--cs-wide) !important;
+  background:
+    radial-gradient(58% 62% at 50% 34%, rgba(37, 99, 235, 0.2), transparent 68%),
+    radial-gradient(40% 46% at 82% 74%, rgba(124, 58, 237, 0.16), transparent 70%),
+    linear-gradient(180deg, #05070d 0%, #0a0f1c 52%, #06080f 100%);
+}
+
+/* The display owns exactly one viewport; the caption deliberately falls below
+   the fold so it never steals height from the monitor. `svh` rather than `vh`
+   so a collapsing mobile URL bar does not resize it mid-scroll. */
+.cs-hero-media > .cs-reel {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  /* Clears the sticky 92px header, which overlays the top of the band and was
+     cutting off the monitor's bezel. */
+  padding-top: 92px;
+  padding-bottom: clamp(28px, 4vh, 52px);
+}
+
+/* Inside the hero monitor, the screens use a dedicated slower drift so the
+   full dashboard is visible over one animation cycle. The general rule at
+   line ~184 sets 1.18× overflow + 12% pan; the hero gets 1.35× + 22% pan
+   so the deeper dashboard content is fully revealed. */
+.cs-hero-media .cs-monitor-screen .cm-app {
+  min-height: calc((100cqh - 34px) * 1.35);
+  animation: cs-hero-drift 22s ease-in-out infinite;
+}
+
+@keyframes cs-hero-drift {
+  0%, 8% {
+    transform: translateY(0);
+  }
+  48%, 52% {
+    transform: translateY(calc((100cqh - 34px) * -0.22));
+  }
+  92%, 100% {
+    transform: translateY(0);
+  }
+}
+
+.cs-monitor {
+  /* The screen is 16:10, so its height is width / 1.6. Solve for the width that
+     keeps screen + chin + neck + foot inside what one viewport leaves after the
+     header, the band padding, and the legend row: ~300px in total. */
+  width: min(1180px, 100%, calc((100svh - 260px) * 1.6));
+  margin: 0 auto;
+  /* Depth for the tilt. Without perspective a rotateY reads as a squash. */
+  perspective: 2200px;
+  perspective-origin: 62% 42%;
+}
+
+.cs-monitor-body {
+  position: relative;
+  padding: clamp(9px, 1vw, 15px);
+  border-radius: clamp(10px, 1.1vw, 16px);
+  background: linear-gradient(158deg, #3d4759 0%, #232b3a 42%, #161c27 100%);
+  box-shadow:
+    0 60px 130px -40px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  /* Subtle on purpose: this UI is dense tables, and a steep angle makes them
+     unreadable. Enough rotation to sit in space, not enough to obscure. */
+  transform: rotateY(-7deg) rotateX(2deg);
+  transform-style: preserve-3d;
+}
+
+.cs-monitor-screen {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  container-type: size;
+  overflow: hidden;
+  border-radius: clamp(4px, 0.5vw, 7px);
+  background: #05070d;
+}
+
+/* The cm-app now fills the aspect-ratio panel at natural scale. A gentle
+   drift reveals the lower portion of longer screens. Short screens
+   (dashboard) get min-height: 0 from the hero-specific override so they
+   sit flush instead of panning over empty space. */
+.cs-monitor-screen .cm-app {
+  min-height: calc((100cqh - 34px) * 1.18);
+  animation: cs-screen-drift 18s ease-in-out infinite;
+}
+
+/* A slow, shallow drift — 12% translation against 18% guaranteed overflow
+   keeps the bottom never visible. */
+@keyframes cs-screen-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(calc((100cqh - 34px) * -0.12));
+  }
+}
+
+.cs-reel-screen,
+.cs-reel-frame {
+  height: 100%;
+}
+
+.cs-monitor-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.02) 28%,
+    transparent 54%
+  );
+  pointer-events: none;
+}
+
+.cs-monitor-chin {
+  height: clamp(16px, 1.8vw, 26px);
+  display: grid;
+  place-items: center;
+}
+
+.cs-monitor-chin span {
+  width: 42px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.cs-monitor-neck {
+  width: clamp(70px, 8vw, 104px);
+  height: clamp(26px, 3vw, 44px);
+  margin: 0 auto;
+  background: linear-gradient(180deg, #2a3244 0%, #1a2130 100%);
+  clip-path: polygon(16% 0, 84% 0, 100% 100%, 0 100%);
+}
+
+.cs-monitor-foot {
+  width: clamp(180px, 20vw, 280px);
+  height: clamp(8px, 0.9vw, 12px);
+  margin: 0 auto;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(180deg, #39435800 0%, #2b3346 22%, #141a25 100%);
+  box-shadow: 0 26px 40px -18px rgba(0, 0, 0, 0.9);
+}
+
+/* ------------------------------------------------------------- the reel --- */
+
+.cs-reel {
+  display: grid;
+  gap: 0;
+}
+
+.cs-reel-screens {
+  position: relative;
+  display: grid;
+}
+
+/* Video-like cinematic crossfade — slow opacity + gentle scale creates the
+   feeling of a live product walkthrough rather than a slideshow. */
+.cs-reel-screen {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: scale(1.018);
+  filter: blur(2px);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1400ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.cs-reel-screen.is-active {
+  opacity: 1;
+  transform: none;
+  filter: blur(0px);
+  z-index: 2;
+}
+
+.cs-reel-frame {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Pointer drifts toward the sidebar and pulses a click before each switch.
+   Re-keyed per screen in the component so the animation restarts. */
+.cs-reel-cursor {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+  animation: cs-cursor-path 3800ms cubic-bezier(0.5, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+.cs-reel-cursor svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes cs-cursor-path {
+  0% {
+    opacity: 0;
+    transform: translate3d(58%, 62%, 0) scale(1);
+  }
+  12% {
+    opacity: 1;
+  }
+  55% {
+    transform: translate3d(30%, 48%, 0) scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: translate3d(7%, 33%, 0) scale(1);
+  }
+  92% {
+    transform: translate3d(7%, 33%, 0) scale(0.82);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(7%, 33%, 0) scale(1);
+  }
+}
+
+.cs-reel-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: min(1120px, 100%);
+  margin: clamp(26px, 3vw, 40px) auto 0;
+}
+
+.cs-reel-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.cs-reel-label span {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.cs-reel-pips {
+  display: flex;
+  gap: 7px;
+}
+
+.cs-reel-pips button {
+  position: relative;
+  width: 26px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 320ms ease, width 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Already-played pips fill solid */
+.cs-reel-pips button.is-done {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.cs-reel-pips button.is-active {
+  width: 48px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Progress bar that fills left→right like a video timeline */
+.cs-pip-progress {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  transform-origin: left center;
+  animation: cs-pip-fill linear forwards;
+}
+
+@keyframes cs-pip-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.cs-stage {
+  padding: clamp(16px, 2.4vw, 40px);
+  border-radius: clamp(16px, 2vw, 28px);
+  background: var(--cs-stage);
+}
+
+.cs-frame {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: #f5f7fb;
+}
+
+.cs-frame-chrome {
+  min-height: 38px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid #dce2eb;
+  background: #ffffff;
+}
+
+.cs-frame-chrome i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c4ccd8;
+}
+
+.cs-frame-chrome span {
+  margin-left: 10px;
+  color: #8993a3;
+  font-size: 0.68rem;
+  text-transform: capitalize;
+}
+
+.cs-frame-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes cs-stage-scroll {
+  0%, 12% {
+    transform: translateY(0);
+  }
+  45%, 55% {
+    transform: translateY(-15%);
+  }
+  88%, 100% {
+    transform: translateY(0);
+  }
+}
+
+.cs-stage-caption {
+  max-width: var(--cs-measure);
+  margin: clamp(18px, 2vw, 26px) auto 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* Sits just past the fold under the full-height display. */
+.cs-hero-media > .cs-stage-caption {
+  padding-bottom: clamp(48px, 7vh, 96px);
+}
+
+/* -------------------------------------------------------- introduction --- */
+
+.cs-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.3fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: start;
+  padding-block: clamp(60px, 9vw, 140px);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-eyebrow {
+  margin: 0;
+  color: var(--cs-muted);
+}
+
+.cs-intro-body {
+  display: grid;
+  gap: 22px;
+  max-width: var(--cs-measure);
+}
+
+.cs-intro-body p {
+  margin: 0;
+  color: var(--cs-body);
+  font-size: clamp(1.02rem, 1.15vw, 1.12rem);
+  line-height: 1.78;
+}
+
+.cs-lede {
+  color: var(--cs-ink) !important;
+  font-size: clamp(1.32rem, 2.2vw, 1.85rem) !important;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  line-height: 1.42 !important;
+}
+
+/* --------------------------------------------------------- sections ------ */
+
+.cs-section {
+  padding-block: clamp(70px, 11vw, 170px);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-section-head {
+  display: grid;
+  gap: 22px;
+  max-width: 860px;
+  margin-bottom: clamp(40px, 6vw, 84px);
+}
+
+.cs-section-head h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
+  letter-spacing: -0.038em;
+  line-height: 1.04;
+}
+
+.cs-section-head p {
+  margin: 0;
+  max-width: var(--cs-measure);
+  color: var(--cs-body);
+  font-size: clamp(1.05rem, 1.3vw, 1.22rem);
+  line-height: 1.72;
+}
+
+/* -------------------------------------------------------------- quote ---- */
+
+.cs-quote {
+  max-width: 940px;
+  margin: 0;
+  padding-top: clamp(30px, 4vw, 56px);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-quote p {
+  margin: 0 0 20px;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.24;
+}
+
+.cs-quote cite {
+  color: var(--cs-muted);
+  font-size: 0.82rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------- principles ---- */
+
+.cs-principles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(28px, 3.5vw, 56px);
+  margin: 0 0 clamp(50px, 7vw, 100px);
+  padding: 0;
+  list-style: none;
+  counter-reset: principle;
+}
+
+.cs-principles li {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding-top: 22px;
+  border-top: 1px solid var(--cs-rule);
+  counter-increment: principle;
+}
+
+.cs-principles li::before {
+  content: counter(principle, decimal-leading-zero);
+  color: var(--cs-muted);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.cs-principles h3 {
+  margin: 0;
+  font-size: 1.16rem;
+  letter-spacing: -0.018em;
+  line-height: 1.32;
+}
+
+.cs-principles p {
+  margin: 0;
+  color: var(--cs-body);
+  font-size: 0.98rem;
+  line-height: 1.72;
+}
+
+/* ------------------------------------------------------------ palette ---- */
+
+.cs-palette {
+  margin-bottom: clamp(50px, 7vw, 100px);
+}
+
+.cs-palette h3 {
+  margin: 0 0 24px;
+  font-size: 1.16rem;
+  letter-spacing: -0.018em;
+}
+
+.cs-palette ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-palette li {
+  display: grid;
+  gap: 6px;
+}
+
+.cs-swatch {
+  height: 76px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.09);
+}
+
+.cs-palette b {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.cs-palette code {
+  color: var(--cs-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.cs-palette small {
+  color: var(--cs-body);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------- old meets new --- */
+
+.cs-compare {
+  display: grid;
+  gap: 0;
+  margin: 0 0 clamp(50px, 7vw, 90px);
+  padding: 0;
+  list-style: none;
+}
+
+.cs-compare li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 52px);
+  align-items: start;
+  padding-block: clamp(28px, 3.4vw, 44px);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-compare li:last-child {
+  border-bottom: 1px solid var(--cs-rule);
+}
+
+.cs-compare-num {
+  color: var(--cs-muted);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.cs-compare-old,
+.cs-compare-new {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.cs-tag {
+  width: max-content;
+  color: var(--cs-muted);
+}
+
+.cs-tag.is-now {
+  color: var(--orange);
+}
+
+.cs-compare h3 {
+  margin: 0;
+  font-size: clamp(1.14rem, 1.7vw, 1.4rem);
+  letter-spacing: -0.022em;
+  line-height: 1.28;
+}
+
+.cs-compare p {
+  margin: 0;
+  color: var(--cs-body);
+  font-size: 0.98rem;
+  line-height: 1.72;
+}
+
+.cs-compare-new p {
+  color: var(--cs-ink);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* Compressed lifecycle strip — replaces the old eight-card grid. */
+.cs-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-flow li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border: 1px solid var(--cs-rule);
+  border-radius: 999px;
+  color: var(--cs-ink);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.cs-flow span {
+  color: var(--cs-muted);
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* ------------------------------------------------------------ screens ---- */
+
+.cs-screens {
+  display: grid;
+  gap: clamp(52px, 7vw, 104px);
+}
+
+.cs-screen {
+  display: grid;
+  gap: clamp(22px, 2.6vw, 36px);
+}
+
+.cs-screen-copy {
+  display: grid;
+  gap: 14px;
+  max-width: var(--cs-measure);
+}
+
+.cs-screen-copy h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.cs-screen-copy p {
+  margin: 0;
+  color: var(--cs-body);
+  font-size: 1.02rem;
+  line-height: 1.74;
+}
+
+.cs-screen-detail {
+  padding-left: 20px;
+  border-left: 2px solid var(--cs-rule);
+  color: var(--cs-muted) !important;
+  font-size: 0.95rem !important;
+}
+
+/* The screen stages break the content rail and run wide. */
+.cs-screens .cs-stage,
+.cs-section > .cs-stage {
+  margin-inline: calc(var(--cs-wide) - var(--cs-gutter));
+}
+
+.cs-evidence-grid {
+  margin-top: clamp(34px, 5vw, 70px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cs-evidence-grid figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--cs-rule);
+  background: #ffffff;
+}
+
+.cs-evidence-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--cs-rule);
+}
+
+.cs-evidence-grid figcaption {
+  padding: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.cs-evidence-grid figcaption strong {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: 1rem;
+}
+
+.cs-evidence-grid figcaption span {
+  color: var(--cs-body);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+/* ----------------------------------------------------------- outcomes ---- */
+
+.cs-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(26px, 3.4vw, 52px);
+  margin: 0 0 clamp(50px, 7vw, 96px);
+  padding: 0;
+  list-style: none;
+}
+
+.cs-stats li {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding-top: 22px;
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-stats strong {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.cs-stats b {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cs-stats span {
+  color: var(--cs-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.cs-outcome-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 0 clamp(30px, 4vw, 64px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-outcome-list li {
+  padding-block: 20px;
+  border-top: 1px solid var(--cs-rule);
+  color: var(--cs-ink);
+  font-size: 1.02rem;
+  line-height: 1.66;
+}
+
+.cs-stack {
+  display: grid;
+  gap: 12px;
+  margin-top: clamp(44px, 6vw, 80px);
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-stack span {
+  color: var(--cs-muted);
+}
+
+.cs-stack p {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--cs-body);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------- next ---- */
+
+.cs-next {
+  display: grid;
+  gap: 22px;
+  padding-block: clamp(70px, 11vw, 160px);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.cs-next h2 {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.cs-next p {
+  margin: 0;
+  max-width: var(--cs-measure);
+  color: var(--cs-body);
+  font-size: clamp(1.05rem, 1.3vw, 1.18rem);
+  line-height: 1.72;
+}
+
+.cs-next-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* ------------------------------------------------------------- reveal ---- */
+
+/* Uses the shared [data-reveal] system in components/ScrollAnimator.tsx. */
+
+/* --------------------------------------------------------- responsive ---- */
+
+/* Reduced-motion overrides removed — the reel is the centrepiece of the
+   case study and must always auto-play with smooth transitions. */
+
+@media (max-width: 900px) {
+  .cs-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  /* The tilt costs legibility at small sizes for no gain — flatten it. */
+  .cs-monitor-body {
+    transform: none;
+  }
+
+  .cs-monitor {
+    perspective: none;
+    /* Width-limited here, not height-limited, so drop the viewport term. */
+    width: min(1120px, 100%);
+  }
+
+  /* Forcing a full viewport here just adds dead space above and below a
+     width-limited display — let the band size to its content instead. */
+  .cs-hero-media > .cs-reel {
+    min-height: 0;
+    padding-top: clamp(72px, 12vh, 104px);
+    padding-bottom: clamp(24px, 4vh, 40px);
+  }
+
+
+  .cs-compare li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .cs-compare-num {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .cs-stage {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+
+  .cs-frame-chrome { min-height: 30px; }
+
+  .cs-evidence-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .cs-outcome-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

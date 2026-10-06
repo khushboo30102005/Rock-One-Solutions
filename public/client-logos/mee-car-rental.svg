@@ -1,0 +1,11 @@
+<svg width="340" height="96" viewBox="0 0 340 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Mee Car Rental logo</title>
+  <rect width="340" height="96" rx="18" fill="white"/>
+  <path d="M29 60c4-17 17-28 36-32 21 3 35 14 42 32" stroke="#0F2A63" stroke-width="6" stroke-linecap="round"/>
+  <path d="M39 61h57" stroke="#F35A2B" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="47" cy="68" r="8" fill="#0F2A63"/>
+  <circle cx="91" cy="68" r="8" fill="#0F2A63"/>
+  <path d="M56 41h25" stroke="#10A8DF" stroke-width="5" stroke-linecap="round"/>
+  <text x="126" y="45" fill="#0F2A63" font-family="Arial, sans-serif" font-size="27" font-weight="850">Mee Car</text>
+  <text x="127" y="69" fill="#0F2A63" font-family="Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="1.8">RENTAL</text>
+</svg>

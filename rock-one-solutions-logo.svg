@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" role="img" aria-labelledby="title desc">
+  <title id="title">Rock One Solutions Logo</title>
+  <desc id="desc">Rock One Solutions brand mark with R1 icon and wordmark.</desc>
+
+  <rect x="4" y="12" width="72" height="72" rx="20" fill="#ffffff"/>
+  <rect x="4.75" y="12.75" width="70.5" height="70.5" rx="19.25" fill="none" stroke="#d8e0ee" stroke-width="1.5"/>
+
+  <rect x="20" y="28" width="37" height="37" rx="11" fill="#13275c"/>
+  <rect x="45" y="39" width="19" height="34" rx="7" fill="#f35a2b"/>
+
+  <text x="39" y="58" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff">R</text>
+  <text x="54.5" y="62" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="23" font-weight="850" fill="#ffffff">1</text>
+
+  <text x="94" y="45" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="850" fill="#13275c" letter-spacing="0">Rock One</text>
+  <text x="96" y="66" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="800" fill="#546b9d" letter-spacing="5">SOLUTIONS</text>
+</svg>

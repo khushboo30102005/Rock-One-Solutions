@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" width="360" height="96" role="img" aria-label="Play With Bhahuk">
+  <!-- Typographic placeholder: playwithbhahuk.com publishes no logo asset.
+       Swap for the brand mark when it is available. -->
+  <g fill="none" fill-rule="evenodd">
+    <text x="180" y="34" text-anchor="middle" fill="#8FA3BE"
+          font-family="Inter, 'Segoe UI', Roboto, sans-serif" font-size="13"
+          font-weight="700" letter-spacing="6.4">PLAY WITH</text>
+    <text x="180" y="76" text-anchor="middle" fill="#FFFFFF"
+          font-family="Inter, 'Segoe UI', Roboto, sans-serif" font-size="38"
+          font-weight="800" letter-spacing="1.4">BHAHUK</text>
+    <rect x="128" y="86" width="104" height="3" rx="1.5" fill="#F35A2B" />
+  </g>
+</svg>
