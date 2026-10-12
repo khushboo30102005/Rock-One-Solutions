@@ -52,12 +52,12 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         slug: "custom-website-development",
-        title: "Custom Website Development",
+        title: "High-Performance Custom Website Development Services | Rock One Solutions",
         image: "/service-detail-visuals/custom-website-development.png",
         imageAlt: "Custom website development workspace with website screens, code, and wireframes",
         tagline: "Premium, conversion-led websites built to earn trust fast.",
         summary:
-          "We design and develop fast, responsive websites with a clear page structure that turns visitors into qualified inquiries — crafted around your brand, never forced into a template.",
+          "Custom web development engineered for performance, rapid loading, and effortless CMS management. Build scalable, high-converting websites tailored for your business. Request a quote.",
         deliverables: [
           "Bespoke UI design and front-end build",
           "Conversion-focused page structure and copy guidance",
@@ -72,12 +72,11 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "ux-ui-design",
-        title: "UX / UI Web Design",
+        title: "Conversion-Focused UX/UI Web Design Services | Rock One Solutions",
         image: "/service-detail-visuals/ux-ui-design.png",
         imageAlt: "UX and UI design workshop with prototype screens, journey maps, and color swatches",
         tagline: "Interfaces that feel intuitive and look unmistakably yours.",
-        summary:
-          "We turn messy navigation, unclear forms, and weak inquiry paths into practical screens that help buyers understand, decide, and contact you faster.",
+        summary: "Transform your digital product with user-centric UX/UI web design. We craft high-converting interfaces, interactive wireframes, intuitive prototypes, and scalable design systems for web and mobile.",
         deliverables: [
           "User flows and wireframes",
           "High-fidelity UI and a reusable design system",
@@ -150,12 +149,12 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         slug: "custom-software-development",
-        title: "Custom Software Development",
+        title: "Enterprise Custom Software Development & Cloud Solutions | Rock One",
         image: "/service-detail-visuals/custom-software-development.png",
         imageAlt: "Custom software development workspace with internal tool screens and architecture plans",
         tagline: "Purpose-built tools that replace scattered spreadsheets.",
         summary:
-          "We build software around how your business actually works — internal tools for operations, reporting, and workflows that off-the-shelf products can't quite fit.",
+          "Solve complex operational challenges with tailor-made software solutions. We build scalable custom ERPs, secure web portals, and robust database management systems designed for your business.",
         deliverables: [
           "Discovery and solution design",
           "Custom web application build",
@@ -170,12 +169,12 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "app-development",
-        title: "App Development",
+        title: "Enterprise Custom Software Development & Cloud Solutions | Rock One",
         image: "/service-detail-visuals/app-development.png",
         imageAlt: "App development workspace with mobile screens, tablet prototype, and user journey map",
         tagline: "Business apps built around real user journeys.",
         summary:
-          "We design and develop practical web and mobile app experiences for teams, customers, and operations — with clean flows, reliable architecture, and room to connect with CRM, payments, reporting, or internal systems.",
+          "Tailor-made app and software solutions to streamline your business operations. Custom iOS and Android apps, web portals, ERPs, and secure database management systems designed for growth",
         deliverables: [
           "App strategy, user flows, and feature planning",
           "Responsive web app or mobile app interface",
@@ -230,12 +229,11 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "workflow-automation",
-        title: "Workflow Automation",
+        title: "Business Process & Workflow Automation Services | Rock One Solutions",
         image: "/service-detail-visuals/workflow-automation.png",
         imageAlt: "Workflow automation workspace showing form, email, CRM, and approval handoff planning",
         tagline: "Connect the steps and remove the busywork.",
-        summary:
-          "Forms, handoffs, notifications, and reporting connected end to end — so your team spends time on work that matters instead of chasing updates.",
+        summary: "Eliminate manual tasks with custom business workflow automation. We seamlessly integrate CRMs, third-party apps, and web forms to streamline operations, save time, and prevent costly errors.",
         deliverables: [
           "Workflow and trigger mapping",
           "Automated handoffs and alerts",
@@ -268,12 +266,12 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         slug: "seo",
-        title: "Search Engine Optimization",
+        title: "Technical & Organic Search Engine Optimization (SEO) Services | Rock One",
         image: "/service-detail-visuals/seo.png",
         imageAlt: "SEO strategy workspace with content map, keyword cards, and technical audit notes",
         tagline: "Attract organic, high-intent search traffic.",
         summary:
-          "We fix the technical floor, organize pages around real buyer queries, and build local and service content that gives search engines a clearer reason to trust you.",
+          "Boost your search engine rankings and organic traffic with data-driven Technical & Content SEO strategies. Comprehensive keyword research, on-page optimization, and technical SEO tailored for business growth.",
         deliverables: [
           "Technical SEO audit and fixes",
           "Keyword and content strategy",
@@ -405,12 +403,12 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "ai-voice-agent",
-        title: "AI Voice Agent",
+        title: "Custom AI Voice Agent Development & Calling Automation | Rock One Solutions",
         image: "/service-detail-visuals/ai-voice-agent.png",
         imageAlt: "AI voice agent planning workspace with headset, microphone, call flow, and CRM handoff notes",
-        tagline: "Voice automation for calls, inquiries, and follow-up.",
+        tagline: "Custom AI Voice Agent Development for Automated Business Calls & Leads",
         summary:
-          "We plan and build AI voice agent workflows for businesses that want faster call handling, inquiry qualification, appointment booking, reminders, or structured follow-up — with human review and business rules where control matters.",
+          "Custom AI Voice Agents for inbound and outbound calling automation. Easily integrate CRM logging, smart lead qualification, and 24/7 call handling.",
         deliverables: [
           "Voice agent use-case and conversation planning",
           "Call flow, script, and fallback design",
