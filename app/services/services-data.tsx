@@ -190,12 +190,12 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "crm-systems",
-        title: "CRM Systems",
+        title: "Custom CRM Systems & Sales Pipeline Development | Rock One Solutions",
         image: "/service-detail-visuals/crm-systems.png",
         imageAlt: "CRM systems workspace with lead pipeline screen and follow-up flow planning",
-        tagline: "Every lead captured, owned, and followed up.",
+        tagline: "Custom CRM Development & Business Lead Management Systems",
         summary:
-          "Lead tracking, client records, follow-up visibility, and clear team ownership — so no inquiry slips through the cracks from first touch to close.",
+          "Build custom CRM systems tailored to your unique sales cycle. Track leads, automate follow-ups, and manage order pipelines effectively. Request a demo.",
         deliverables: [
           "Lead capture and pipeline setup",
           "Contact and account records",
