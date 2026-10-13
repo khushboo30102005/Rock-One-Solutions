@@ -6,14 +6,14 @@ import "../rock-one-pillars.css";
 const page = pillarPages["rock-one-automation"];
 
 export const metadata: Metadata = {
-  title: "Rock One Automation | Workflow and Handoff Automation",
+  title: "Business Workflow & CRM Automation | Rock One Solutions",
   description:
-    "Rock One Automation connects website forms, CRM routing, follow-up, alerts, and reporting into one clean workflow.",
+    "Eliminate manual tasks with custom workflow automation by Rock One Solutions. Seamlessly connect website forms, CRM routing, instant alerts, and automated follow-ups.",
   alternates: { canonical: "/rock-one-automation/" },
   openGraph: {
-    title: "Rock One Automation | Workflow and Handoff Automation",
+    title: "Business Workflow & CRM Automation | Rock One Solutions",
     description:
-      "Connect website forms, CRM routing, follow-up, alerts, and reporting into one clean workflow.",
+      "Eliminate manual tasks with custom workflow automation by Rock One Solutions. Seamlessly connect website forms, CRM routing, instant alerts, and automated follow-ups.",
     url: "/rock-one-automation/",
     type: "website",
   },

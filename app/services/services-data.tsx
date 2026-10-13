@@ -52,12 +52,12 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         slug: "custom-website-development",
-        title: "High-Performance Custom Website Development Services | Rock One Solutions",
+        title: "Custom Website Development & Design Services | Rock One Solutions",
         image: "/service-detail-visuals/custom-website-development.png",
         imageAlt: "Custom website development workspace with website screens, code, and wireframes",
         tagline: "Premium, conversion-led websites built to earn trust fast.",
         summary:
-          "Custom web development engineered for performance, rapid loading, and effortless CMS management. Build scalable, high-converting websites tailored for your business. Request a quote.",
+          "Get high-converting, lightning-fast custom websites engineered for performance and seamless CMS control by Rock One Solutions. Request a free quote today",
         deliverables: [
           "Bespoke UI design and front-end build",
           "Conversion-focused page structure and copy guidance",
@@ -149,12 +149,12 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         slug: "custom-software-development",
-        title: "Enterprise Custom Software Development & Cloud Solutions | Rock One",
+        title: "Custom Software & Enterprise Solutions | Rock One Solutions",
         image: "/service-detail-visuals/custom-software-development.png",
         imageAlt: "Custom software development workspace with internal tool screens and architecture plans",
         tagline: "Purpose-built tools that replace scattered spreadsheets.",
         summary:
-          "Solve complex operational challenges with tailor-made software solutions. We build scalable custom ERPs, secure web portals, and robust database management systems designed for your business.",
+          "Solve complex operational challenges with tailor-made software solutions from Rock One Solutions. Scalable ERPs, secure web portals, and database management.",
         deliverables: [
           "Discovery and solution design",
           "Custom web application build",
@@ -169,12 +169,12 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "app-development",
-        title: "Enterprise Custom Software Development & Cloud Solutions | Rock One",
+        title: "Custom Mobile App Development Services | Rock One Solutions",
         image: "/service-detail-visuals/app-development.png",
         imageAlt: "App development workspace with mobile screens, tablet prototype, and user journey map",
         tagline: "Business apps built around real user journeys.",
         summary:
-          "Tailor-made app and software solutions to streamline your business operations. Custom iOS and Android apps, web portals, ERPs, and secure database management systems designed for growth",
+          "Transform your digital ideas into powerful iOS and Android apps. Rock One Solutions delivers user-centric, high-performance mobile app development services.",
         deliverables: [
           "App strategy, user flows, and feature planning",
           "Responsive web app or mobile app interface",
@@ -189,12 +189,12 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "crm-systems",
-        title: "Custom CRM Systems & Sales Pipeline Development | Rock One Solutions",
+        title: "Custom CRM Systems & Development Services | Rock One Solutions",
         image: "/service-detail-visuals/crm-systems.png",
         imageAlt: "CRM systems workspace with lead pipeline screen and follow-up flow planning",
         tagline: "Custom CRM Development & Business Lead Management Systems",
         summary:
-          "Build custom CRM systems tailored to your unique sales cycle. Track leads, automate follow-ups, and manage order pipelines effectively. Request a demo.",
+          "Streamline your sales pipeline and customer management with custom CRM systems. Rock One Solutions builds tailored CRMs to automate workflows and drive business growth.",
         deliverables: [
           "Lead capture and pipeline setup",
           "Contact and account records",
@@ -403,12 +403,12 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "ai-voice-agent",
-        title: "Custom AI Voice Agent Development & Calling Automation | Rock One Solutions",
+        title: "Custom AI Voice Agents for Business Automation | Rock One Solutions",
         image: "/service-detail-visuals/ai-voice-agent.png",
         imageAlt: "AI voice agent planning workspace with headset, microphone, call flow, and CRM handoff notes",
         tagline: "Custom AI Voice Agent Development for Automated Business Calls & Leads",
         summary:
-          "Custom AI Voice Agents for inbound and outbound calling automation. Easily integrate CRM logging, smart lead qualification, and 24/7 call handling.",
+          "Automate inbound and outbound calls with custom AI Voice Agents from Rock One Solutions. Integrate instant booking, CRM logging, and smart lead qualification.",
         deliverables: [
           "Voice agent use-case and conversation planning",
           "Call flow, script, and fallback design",

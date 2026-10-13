@@ -5,15 +5,6 @@ import MobileTabBar from "@/components/MobileTabBar";
 import "./globals.css";
 import "./shared-ui.css";
 
-/**
- * The stylesheet has always asked for Inter but the font was never actually
- * loaded, so the site rendered in whatever the visitor had installed. These are
- * self-hosted at build time by next/font — no runtime request to Google, and no
- * layout shift.
- *
- * --font-sans  body copy, site-wide
- * --font-display  editorial headings; currently scoped to the case study
- */
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -28,9 +19,9 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rockonesolutions.com"),
-  title: "Rock One Solutions | Website Development and Automation Agency",
+  title: "Rock One Solutions | Custom CRM, AI Voice Agents & Tech Development",
   description:
-    "Rock One Solutions builds premium websites, revenue automation, CRM workflows, and connected systems that help businesses convert and operate faster.",
+    "Transform your business operations with Rock One Solutions. We specialize in custom CRM systems, AI Voice Agents, dedicated remote teams, and custom web & software development.",
   alternates: {
     canonical: "./",
   },
@@ -42,11 +33,29 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rock One Solutions | Website Development and Automation Agency",
+    title: "Rock One Solutions | Custom CRM, AI Voice Agents & Tech Development",
     description:
-      "Rock One Solutions builds premium websites, revenue automation, CRM workflows, and connected systems that help businesses convert and operate faster.",
+      "Transform your business operations with Rock One Solutions. We specialize in custom CRM systems, AI Voice Agents, dedicated remote teams, and custom web & software development.",
     images: ["/rock-one-hero-showcase.png"],
   },
+};
+
+// JSON-LD Organization Schema for Search Engines
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Rock One Solutions",
+  "url": "https://rockonesolutions.com",
+  "logo": "https://rockonesolutions.com/icon.svg",
+  "description": "Rock One Solutions provides custom CRM systems, AI Voice Agents, dedicated remote technical teams, and software development.",
+  "knowsAbout": [
+    "CRM Systems",
+    "AI Voice Agents",
+    "Remote Tech Teams",
+    "Workflow Automation",
+    "Software Development",
+    "Web Development"
+  ]
 };
 
 export default function RootLayout({
@@ -57,6 +66,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemaData)
+          }}
+        />
         <Script
           id="microsoft-clarity"
           strategy="afterInteractive"

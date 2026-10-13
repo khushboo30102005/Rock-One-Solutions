@@ -9,14 +9,14 @@ import TrackedContactLink from "@/components/TrackedContactLink";
 import "./remote-tech-team.css";
 
 export const metadata: Metadata = {
-  title: "Remote In-House Tech Team | Rock One Solutions",
+  title: "Hire Dedicated Remote Tech Teams | Rock One Solutions",
   description:
-    "Get priority remote technical support for recurring website, software, CRM, SEO, and automation work without hiring a full-time employee.",
+    "Scale your development and operational capacity with skilled remote tech teams from Rock One Solutions. Dedicated technical support for CRM, web, app, and automation projects.",
   alternates: { canonical: "/remote-tech-team/" },
   openGraph: {
-    title: "Remote In-House Tech Team | Rock One Solutions",
+    title: "Hire Dedicated Remote Tech Teams | Rock One Solutions",
     description:
-      "Priority remote technical support for recurring website, software, CRM, SEO, and automation work.",
+      "Scale your development and operational capacity with skilled remote tech teams from Rock One Solutions. Dedicated technical support for CRM, web, app, and automation projects.",
     url: "/remote-tech-team/",
     type: "website",
   },
@@ -146,7 +146,7 @@ export default function RemoteTechTeamPage() {
             <div className="remote-hero-copy">
               <span className="remote-label">(REMOTE TEAM)</span>
               <h1 id="remote-hero-title">
-                YOUR IN-HOUSE TECH SUPPORT, WITHOUT THE FULL-TIME HIRE.
+                Dedicated Remote Tech Teams by Rock One Solutions
               </h1>
               <p>
                 For companies with regular website, software, CRM, SEO, or
