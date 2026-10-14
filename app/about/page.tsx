@@ -9,10 +9,13 @@ import TrackedContactLink from "@/components/TrackedContactLink";
 import "./about.css";
 
 export const metadata: Metadata = {
-  title: "About | Rock One Solutions",
+  title: "About Us | Leading Tech & AI Solutions Partner | Rock One Solutions",
   description:
-    "Rock One Solutions is a Bengaluru studio building websites, CRM workflows, automation handoffs, and revenue systems for growing businesses.",
+    "Learn about Rock One Solutions. We empower growing businesses with custom CRM systems, AI Voice Agents, dedicated remote teams, and scalable software solutions.",
   openGraph: {
+    title: "About Us | Leading Tech & AI Solutions Partner | Rock One Solutions",
+    description:
+      "Learn about Rock One Solutions. We empower growing businesses with custom CRM systems, AI Voice Agents, dedicated remote teams, and scalable software solutions.",
     url: "https://rockonesolutions.com/about/",
   },
 };
@@ -214,8 +217,8 @@ export default function AboutPage() {
           <div className="about-hero-inner">
             <span className="about-badge">About Rock One Solutions</span>
             <h1 id="about-hero-title">
-              Dedicated industry experts with a
-              <span> proven track record.</span>
+              About Rock One Solutions Your Tech & AI 
+              <span> Solutions Partner.</span>
             </h1>
             <p>
               We are a Bengaluru studio building websites, CRM workflows, and
