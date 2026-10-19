@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import MobileTabBar from "@/components/MobileTabBar";
+import ConsultationPopup from "@/components/ConsultationPopup";
 import "./globals.css";
 import "./shared-ui.css";
 
@@ -91,6 +92,7 @@ export default function RootLayout({
       <body>
         {children}
         <MobileTabBar />
+        <ConsultationPopup />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RMPBCZHBQY"
           strategy="afterInteractive"
