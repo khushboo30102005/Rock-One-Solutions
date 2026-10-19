@@ -7,14 +7,14 @@ import TrackedContactLink from "@/components/TrackedContactLink";
 import "./contact.css";
 
 export const metadata: Metadata = {
-  title: "Contact | Rock One Solutions",
+  title: "Contact Us | Tech & AI Solutions Experts | Rock One Solutions",
   description:
-    "Tell us about your website, app, CRM, or automation project. Share a brief and get a scoped proposal within two working days.",
+    "Ready to scale your business? Contact Rock One Solutions today to discuss your custom CRM, AI Voice Agent, remote team, software, or web development project.",
   alternates: { canonical: "/contact/" },
   openGraph: {
-    title: "Contact | Rock One Solutions",
+    title: "Contact Us | Tech & AI Solutions Experts | Rock One Solutions",
     description:
-      "Tell Rock One Solutions about your website, app, CRM, automation, or growth project.",
+      "Ready to scale your business? Contact Rock One Solutions today to discuss your custom CRM, AI Voice Agent, remote team, software, or web development project.",
     url: "/contact/",
     type: "website",
   },
@@ -74,8 +74,8 @@ export default function ContactPage() {
           <div className="contact-hero-inner">
             <span className="about-badge">Contact</span>
             <h1 id="contact-hero-title">
-              Tell us what you are building,
-              <span> and we will scope it.</span>
+              Contact Rock One Solutions – Tech & AI 
+              <span> Solutions Experts.</span>
             </h1>
             <p>
               Share the goal, the timeline, and a budget range if you have one. You get a

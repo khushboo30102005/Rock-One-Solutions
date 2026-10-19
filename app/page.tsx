@@ -146,7 +146,7 @@ export default function Home() {
           <div className="alex-hero-grid">
             <div className="alex-hero-main">
               <h1 id="home-title">
-                A DIGITAL GROWTH STUDIO THAT BUILDS WEBSITES, CRM & AUTOMATION FOR BUSINESSES READY TO SCALE
+                Rock One Solutions Custom CRM, AI Voice Agents & Software Development
               </h1>
             </div>
 
