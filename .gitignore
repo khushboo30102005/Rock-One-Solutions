@@ -43,3 +43,7 @@ next-env.d.ts
 /next-dev*.log
 /next-start*.log
 /run-*.cmd
+
+# sanity studio
+/sanity/node_modules
+/sanity/dist

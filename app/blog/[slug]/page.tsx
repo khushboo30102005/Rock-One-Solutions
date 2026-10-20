@@ -5,16 +5,15 @@ import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import {
-  blogPosts,
   formatPostDate,
-  getPostBySlug,
-  relatedPosts,
   type BlogBlock
 } from "../blog-data";
+import { getAllBlogSlugs, getBlogPostBySlug, getAllBlogPosts } from "@/lib/sanity.content";
 import "../blog.css";
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  const slugs = await getAllBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -23,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     return { title: "Article | Rock One Solutions" };
@@ -109,10 +108,18 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
-  const related = relatedPosts(post.slug, post.category);
+  // Build related posts from all available posts
+  const allPosts = await getAllBlogPosts();
+  const sameCategory = allPosts.filter(
+    (p) => p.slug !== post.slug && p.category === post.category
+  );
+  const others = allPosts.filter(
+    (p) => p.slug !== post.slug && p.category !== post.category
+  );
+  const related = [...sameCategory, ...others].slice(0, 3);
   const canonicalUrl = `https://rockonesolutions.com/blog/${post.slug}/`;
   const articleSchema = {
     "@context": "https://schema.org",

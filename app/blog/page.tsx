@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { blogPosts, formatPostDate } from "./blog-data";
+import { formatPostDate } from "./blog-data";
+import { getAllBlogPosts } from "@/lib/sanity.content";
 import "./blog.css";
 
 export const metadata: Metadata = {
@@ -25,7 +26,8 @@ const arrow = (
   </svg>
 );
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
+  const blogPosts = await getAllBlogPosts();
   const [featured, ...rest] = blogPosts;
 
   return (

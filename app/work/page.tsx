@@ -4,7 +4,8 @@ import Link from "next/link";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { websiteLaunches, workProjects } from "./work-data";
+import { websiteLaunches as localWebsiteLaunches, workProjects as localWorkProjects } from "./work-data";
+import { getAllWorkProjects, getWebsiteLaunches } from "@/lib/sanity.content";
 import "./work.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
   }
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const workProjects = await getAllWorkProjects();
+  const websiteLaunches = getWebsiteLaunches();
+
   return (
     <>
       <ScrollAnimator />

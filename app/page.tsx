@@ -13,7 +13,8 @@ import TechStackMarquee from "@/components/TechStackMarquee";
 import TrackedContactLink from "@/components/TrackedContactLink";
 import Image from "next/image";
 import Link from "next/link";
-import { blogPosts } from "./blog/blog-data";
+import { blogPosts as localBlogPosts } from "./blog/blog-data";
+import { getAllBlogPosts, getGoogleReviews, getClientLogos } from "@/lib/sanity.content";
 
 export const metadata: Metadata = {
   openGraph: {
@@ -27,26 +28,6 @@ type ClientLogo = {
   tone?: "dark";
   fit?: "mark";
 };
-
-const clientLogos: ClientLogo[] = [
-  { name: "MeeAutoParts", logo: "/client-logos/mee-auto-parts.png" },
-  { name: "SSP group", logo: "/client-logos/ssp-group.png" },
-  { name: "American Freight Hub", logo: "/client-logos/american-freight-hub.png", tone: "dark" },
-  { name: "Ferme Foods", logo: "/client-logos/ferme-foods.png" },
-  { name: "Mee Car Rentals", logo: "/client-logos/mee-car-rentals.png" },
-  { name: "DriveX Auto Parts", logo: "/client-logos/drivex-auto-parts.png" },
-  { name: "Intracia Technologies", logo: "/client-logos/intracia-technologies-client.png" },
-  {
-    name: "Pacific Express Trucking",
-    logo: "/client-logos/pacific-express-trucking.png",
-    fit: "mark",
-  },
-  {
-    name: "Subhash Chandra Jyotish",
-    logo: "/client-logos/subhash-chandra-jyotish-mark.png",
-    fit: "mark",
-  },
-];
 
 const systems = [
   {
@@ -92,12 +73,12 @@ const platformCards = [
   }
 ];
 
-const insightCards = blogPosts.slice(0, 3);
+const localInsightCards = localBlogPosts.slice(0, 3);
 
 const googleReviewsUrl =
   "https://www.google.com/maps/search/?api=1&query=Rock%20One%20Solutions%20Bengaluru";
 
-const clientReviews = [
+const localClientReviews = [
   {
     quote:
       "Our Mee Car Rentals site needed to be quick and easy on mobile. Rock One Solutions delivered that. Clear pages, fast load, and a form customers actually use. Happy with the work.",
@@ -128,7 +109,36 @@ const clientReviews = [
   },
 ];
 
-export default function Home() {
+const localClientLogos: ClientLogo[] = [
+  { name: "MeeAutoParts", logo: "/client-logos/mee-auto-parts.png" },
+  { name: "SSP group", logo: "/client-logos/ssp-group.png" },
+  { name: "American Freight Hub", logo: "/client-logos/american-freight-hub.png", tone: "dark" },
+  { name: "Ferme Foods", logo: "/client-logos/ferme-foods.png" },
+  { name: "Mee Car Rentals", logo: "/client-logos/mee-car-rentals.png" },
+  { name: "DriveX Auto Parts", logo: "/client-logos/drivex-auto-parts.png" },
+  { name: "Intracia Technologies", logo: "/client-logos/intracia-technologies-client.png" },
+  {
+    name: "Pacific Express Trucking",
+    logo: "/client-logos/pacific-express-trucking.png",
+    fit: "mark",
+  },
+  {
+    name: "Subhash Chandra Jyotish",
+    logo: "/client-logos/subhash-chandra-jyotish-mark.png",
+    fit: "mark",
+  },
+];
+
+export default async function Home() {
+  const [cmsBlogPosts, cmsReviews, cmsLogos] = await Promise.all([
+    getAllBlogPosts(),
+    getGoogleReviews(),
+    getClientLogos(),
+  ]);
+
+  const insightCards = cmsBlogPosts.slice(0, 3);
+  const clientReviews = cmsReviews.length > 0 ? cmsReviews : localClientReviews;
+  const clientLogos: ClientLogo[] = cmsLogos.length > 0 ? cmsLogos : localClientLogos;
   return (
     <>
       <ScrollAnimator />

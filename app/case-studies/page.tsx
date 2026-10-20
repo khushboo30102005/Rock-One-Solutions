@@ -4,7 +4,8 @@ import Link from "next/link";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { workProjects } from "@/app/work/work-data";
+import { workProjects as localWorkProjects } from "@/app/work/work-data";
+import { getAllWorkProjects } from "@/lib/sanity.content";
 import "../work/work.css";
 
 export const metadata: Metadata = {
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
   }
 };
 
-export default function CaseStudiesPage() {
+export default async function CaseStudiesPage() {
+  const workProjects = await getAllWorkProjects();
+
   return (
     <>
       <ScrollAnimator />
