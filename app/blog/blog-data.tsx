@@ -449,8 +449,10 @@ export const blogPosts: BlogPost[] = [
         type: "p",
         text: "The tracking work is unglamorous and takes a fortnight. It is also the difference between a marketing budget you can defend and one you can only describe."
       }
+      
     ]
   },
+
 {
     slug: "scale-tech-infrastructure-dedicated-remote-teams",
     title: "How to Scale Your Tech Infrastructure with Dedicated Remote Teams Without Quality Compromise",
@@ -472,8 +474,12 @@ export const blogPosts: BlogPost[] = [
         text: "To overcome this dilemma, forward-thinking CTOs, Founders, and Product Managers are turning to a proven operational model: Dedicated Remote Tech Teams. Unlike traditional transactional freelancing or low-cost gig outsourcing, dedicated remote engineering teams operate as a seamless extension of your in-house product organization. They adopt your development culture, integrate into your communication channels, and execute against your core product roadmap with absolute transparency."
       },
       {
-        type: "p",
-        text: "At Rock One Solutions, based out of dynamic ecosystems like Bengaluru, we bridge this gap by delivering elite remote engineering talent alongside full-scale IT services, custom web development, mobile app solutions, and proactive platform maintenance."
+        type: "rich",
+        parts: [
+          { text: "At Rock One Solutions, based out of dynamic ecosystems like Bengaluru, we bridge this gap by delivering elite remote engineering talent alongside full-scale IT services, custom web development, mobile app solutions, and proactive platform maintenance. Explore our core " },
+          { text: "Dedicated Remote Tech Teams", href: "/services/remote-tech-team/" },
+          { text: " service to scale rapidly." }
+        ]
       },
       { type: "h2", text: "The Local Hiring Crisis Facing Growing Tech Companies" },
       {
@@ -510,8 +516,8 @@ export const blogPosts: BlogPost[] = [
       {
         type: "ul",
         items: [
-          "Custom Web Development: Building high-performance, responsive web platforms utilizing modern frameworks like React.js, Next.js, and Node.js.",
-          "Mobile App Development: Crafting lightning-fast, cross-platform mobile experiences for iOS and Android using React Native and Flutter.",
+          "Custom Web Development: Building high-performance, responsive web platforms utilizing modern frameworks like React.js, Next.js, and Node.js. Learn more about our web capabilities through our <a href=\"/services/custom-web-development/\">Custom Web Development</a> solutions.",
+          "Mobile App Development: Crafting lightning-fast, cross-platform mobile experiences for iOS and Android using React Native and Flutter. Explore our <a href=\"/services/mobile-app-development/\">Mobile App Development</a> expertise.",
           "End-to-End IT Services: Comprehensive cloud deployments, microservices architecture, and secure database management.",
           "Minor Website Changes & Rapid Iterations: Fast-turnaround support for UI tweaks, component additions, and landing page optimization.",
           "Ongoing Website Maintenance & Security: Proactive monitoring, performance tuning, dependency upgrades, and security patch management to guarantee 99.9% uptime.",
@@ -563,7 +569,7 @@ export const blogPosts: BlogPost[] = [
         type: "rich",
         parts: [
           { text: "At Rock One Solutions, we remove the friction of global engineering recruitment. Explore our " },
-          { text: "Dedicated Remote Tech Teams", href: "/remote-tech-team/" },
+          { text: "Dedicated Remote Tech Teams", href: "/services/remote-tech-team/" },
           { text: " service to scale your product roadmap with complete confidence." }
         ]
       }
@@ -586,9 +592,12 @@ export const blogPosts: BlogPost[] = [
         answer: "Our remote teams coordinate directly within your preferred working hours, participating in daily standups, sprint planning, and maintaining active real-time collaboration via Slack and project management tools."
       }
     ]
-  }
-
+  },
+  
+  
 ];
+
+
 
 export function getPostBySlug(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
