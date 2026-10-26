@@ -52,7 +52,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         slug: "custom-website-development",
-        title: "Custom Website Development & Design Services | Rock One Solutions",
+        title: "Custom Web Development",
         image: "/service-detail-visuals/custom-website-development.png",
         imageAlt: "Custom website development workspace with website screens, code, and wireframes",
         tagline: "Premium, conversion-led websites built to earn trust fast.",
@@ -169,7 +169,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "app-development",
-        title: "Custom Mobile App Development Services | Rock One Solutions",
+        title: "Mobile App Development",
         image: "/service-detail-visuals/app-development.png",
         imageAlt: "App development workspace with mobile screens, tablet prototype, and user journey map",
         tagline: "Business apps built around real user journeys.",
@@ -189,7 +189,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "crm-systems",
-        title: "Custom CRM Systems & Development Services | Rock One Solutions",
+        title: "Custom CRM Systems",
         image: "/service-detail-visuals/crm-systems.png",
         imageAlt: "CRM systems workspace with lead pipeline screen and follow-up flow planning",
         tagline: "Custom CRM Development & Business Lead Management Systems",
@@ -266,7 +266,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         slug: "seo",
-        title: "Technical & Organic Search Engine Optimization (SEO) Services | Rock One",
+        title: "SEO & Growth Marketing",
         image: "/service-detail-visuals/seo.png",
         imageAlt: "SEO strategy workspace with content map, keyword cards, and technical audit notes",
         tagline: "Attract organic, high-intent search traffic.",
@@ -403,7 +403,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "ai-voice-agent",
-        title: "Custom AI Voice Agents for Business Automation | Rock One Solutions",
+        title: "Custom AI Voice Agents",
         image: "/service-detail-visuals/ai-voice-agent.png",
         imageAlt: "AI voice agent planning workspace with headset, microphone, call flow, and CRM handoff notes",
         tagline: "Custom AI Voice Agent Development for Automated Business Calls & Leads",
