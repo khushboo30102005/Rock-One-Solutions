@@ -6,6 +6,9 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import JsonLd from "@/components/JsonLd";
+import { faqPageNode, faqsFromQa, graph, webPageNode } from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -201,9 +204,21 @@ const arrow = (
   </svg>
 );
 
+const aboutSchema = graph(
+  webPageNode({
+    type: "AboutPage",
+    path: "/about/",
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+    mainEntityId: SCHEMA_IDS.organization,
+  }),
+  faqPageNode("/about/", faqsFromQa(faqs))
+);
+
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={aboutSchema} />
       <ScrollAnimator />
       <SiteHeader active="about" />
 

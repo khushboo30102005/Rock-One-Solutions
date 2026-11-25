@@ -11,6 +11,9 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import TechStackMarquee from "@/components/TechStackMarquee";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import JsonLd from "@/components/JsonLd";
+import { graph, webPageNode } from "@/lib/schema/builders";
+import { SITE_DESCRIPTION } from "@/lib/schema/site";
 import Image from "next/image";
 import Link from "next/link";
 import { blogPosts as localBlogPosts } from "./blog/blog-data";
@@ -129,6 +132,14 @@ const localClientLogos: ClientLogo[] = [
   },
 ];
 
+const homeSchema = graph(
+  webPageNode({
+    path: "/",
+    name: "Rock One Solutions | Custom CRM, AI Voice Agents & Tech Development",
+    description: SITE_DESCRIPTION,
+  })
+);
+
 export default async function Home() {
   const [cmsBlogPosts, cmsReviews, cmsLogos] = await Promise.all([
     getAllBlogPosts(),
@@ -141,6 +152,7 @@ export default async function Home() {
   const clientLogos: ClientLogo[] = cmsLogos.length > 0 ? cmsLogos : localClientLogos;
   return (
     <>
+      <JsonLd data={homeSchema} />
       <ScrollAnimator />
       <SiteHeader active="home" tone="dark" />
 

@@ -3,6 +3,8 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import MobileTabBar from "@/components/MobileTabBar";
 import ConsultationPopup from "@/components/ConsultationPopup";
+import JsonLd from "@/components/JsonLd";
+import { graph, organizationNode, websiteNode } from "@/lib/schema/builders";
 import "./globals.css";
 import "./shared-ui.css";
 
@@ -41,23 +43,8 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD Organization Schema for Search Engines
-const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Rock One Solutions",
-  "url": "https://rockonesolutions.com",
-  "logo": "https://rockonesolutions.com/icon.svg",
-  "description": "Rock One Solutions provides custom CRM systems, AI Voice Agents, dedicated remote technical teams, and software development.",
-  "knowsAbout": [
-    "CRM Systems",
-    "AI Voice Agents",
-    "Remote Tech Teams",
-    "Workflow Automation",
-    "Software Development",
-    "Web Development"
-  ]
-};
+// Site-wide entities, emitted once; pages reference them by @id.
+const siteSchema = graph(organizationNode(), websiteNode());
 
 export default function RootLayout({
   children
@@ -67,14 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
-        <Script
-          id="organization-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemaData)
-          }}
-        />
+        <JsonLd id="site-schema" data={siteSchema} />
         <Script
           id="microsoft-clarity"
           strategy="afterInteractive"

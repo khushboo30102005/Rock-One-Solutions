@@ -5,6 +5,8 @@ import PriceDisplay from "@/components/PriceDisplay";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { pricingGroups } from "./pricing-data";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbNode, faqPageNode, faqsFromQa, graph, webPageNode } from "@/lib/schema/builders";
 import "./pricing.css";
 
 export const metadata: Metadata = {
@@ -52,9 +54,24 @@ const faqs = [
   }
 ];
 
+const pricingSchema = graph(
+  webPageNode({
+    path: "/pricing/",
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+    hasBreadcrumb: true,
+  }),
+  breadcrumbNode("/pricing/", [
+    { name: "Home", path: "/" },
+    { name: "Pricing", path: "/pricing/" },
+  ]),
+  faqPageNode("/pricing/", faqsFromQa(faqs))
+);
+
 export default function PricingPage() {
   return (
     <>
+      <JsonLd data={pricingSchema} />
       <SiteHeader active="pricing" tone="dark" />
 
       <main className="pricing-main">

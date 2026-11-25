@@ -6665,6 +6665,23 @@ h1 {
   max-width: 420px;
 }
 
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 4px;
+}
+
+.footer-columns .footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-social svg {
+  flex: none;
+}
+
 .footer-services-section {
   grid-column: 1 / -1;
   margin-top: clamp(8px, 2vw, 18px);

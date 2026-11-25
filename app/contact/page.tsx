@@ -4,6 +4,9 @@ import ContactForm from "@/components/ContactForm";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import JsonLd from "@/components/JsonLd";
+import { faqPageNode, faqsFromQa, graph, webPageNode } from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
 import "./contact.css";
 
 export const metadata: Metadata = {
@@ -64,9 +67,21 @@ const contactFaqs = [
   }
 ];
 
+const contactSchema = graph(
+  webPageNode({
+    type: "ContactPage",
+    path: "/contact/",
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+    mainEntityId: SCHEMA_IDS.organization,
+  }),
+  faqPageNode("/contact/", faqsFromQa(contactFaqs))
+);
+
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={contactSchema} />
       <SiteHeader active="contact" />
 
       <main className="contact-main">

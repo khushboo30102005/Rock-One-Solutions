@@ -6,6 +6,9 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { workProjects as localWorkProjects } from "@/app/work/work-data";
 import { getAllWorkProjects } from "@/lib/sanity.content";
+import JsonLd from "@/components/JsonLd";
+import { graph, itemListNode, webPageNode } from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
 import "../work/work.css";
 
 export const metadata: Metadata = {
@@ -22,9 +25,23 @@ export const metadata: Metadata = {
 
 export default async function CaseStudiesPage() {
   const workProjects = await getAllWorkProjects();
+  const caseStudiesSchema = graph(
+    webPageNode({
+      type: "CollectionPage",
+      path: "/case-studies/",
+      name: metadata.title as string,
+      description: metadata.description ?? undefined,
+      mainEntityId: SCHEMA_IDS.itemList("/case-studies/"),
+    }),
+    itemListNode(
+      "/case-studies/",
+      workProjects.map((project) => ({ name: project.title, path: project.caseStudyHref }))
+    )
+  );
 
   return (
     <>
+      <JsonLd data={caseStudiesSchema} />
       <ScrollAnimator />
       <SiteHeader active="case-studies" />
       <main className="work-main">

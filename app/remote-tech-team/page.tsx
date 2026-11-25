@@ -6,6 +6,9 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import JsonLd from "@/components/JsonLd";
+import { faqPageNode, faqsFromQa, graph, serviceNode, webPageNode } from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
 import "./remote-tech-team.css";
 
 export const metadata: Metadata = {
@@ -128,9 +131,28 @@ const faqs = [
   }
 ];
 
+const REMOTE_PATH = "/remote-tech-team/";
+
+const remoteSchema = graph(
+  webPageNode({
+    path: REMOTE_PATH,
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+    mainEntityId: SCHEMA_IDS.service(REMOTE_PATH),
+  }),
+  serviceNode({
+    path: REMOTE_PATH,
+    name: "Dedicated Remote Tech Teams",
+    description: metadata.description as string,
+    serviceType: "Dedicated technical support",
+  }),
+  faqPageNode(REMOTE_PATH, faqsFromQa(faqs))
+);
+
 export default function RemoteTechTeamPage() {
   return (
     <>
+      <JsonLd data={remoteSchema} />
       <ScrollAnimator />
       <SiteHeader active="remote" />
 

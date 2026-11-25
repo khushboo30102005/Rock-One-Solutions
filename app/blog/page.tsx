@@ -4,6 +4,9 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { formatPostDate } from "./blog-data";
 import { getAllBlogPosts } from "@/lib/sanity.content";
+import JsonLd from "@/components/JsonLd";
+import { graph, itemListNode, webPageNode } from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
 import "./blog.css";
 
 export const metadata: Metadata = {
@@ -29,9 +32,23 @@ const arrow = (
 export default async function BlogIndexPage() {
   const blogPosts = await getAllBlogPosts();
   const [featured, ...rest] = blogPosts;
+  const blogSchema = graph(
+    webPageNode({
+      type: "CollectionPage",
+      path: "/blog/",
+      name: metadata.title as string,
+      description: metadata.description ?? undefined,
+      mainEntityId: SCHEMA_IDS.itemList("/blog/"),
+    }),
+    itemListNode(
+      "/blog/",
+      blogPosts.map((post) => ({ name: post.title, path: `/blog/${post.slug}/` }))
+    )
+  );
 
   return (
     <>
+      <JsonLd data={blogSchema} />
       <SiteHeader active="blog" />
 
       <main className="blog-main">

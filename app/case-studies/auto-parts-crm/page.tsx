@@ -5,6 +5,9 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { crmProjectScreens, type CrmProjectScreen } from "../../work/work-data";
+import JsonLd from "@/components/JsonLd";
+import { articleNode, breadcrumbNode, graph, webPageNode } from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
 import "../../work/auto-parts-crm/case-study.css";
 import "../../work/work.css";
 
@@ -20,15 +23,28 @@ export const metadata: Metadata = {
   }
 };
 
-const caseStudyJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Auto Parts CRM Case Study",
-  description: "The product strategy, design decisions, and workflow transformation behind the Auto Parts CRM.",
-  author: { "@type": "Organization", name: "Rock One Solutions" },
-  publisher: { "@type": "Organization", name: "Rock One Solutions" },
-  mainEntityOfPage: "https://rockonesolutions.com/case-studies/auto-parts-crm/"
-};
+const CASE_STUDY_PATH = "/case-studies/auto-parts-crm/";
+
+const caseStudyJsonLd = graph(
+  webPageNode({
+    path: CASE_STUDY_PATH,
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+    mainEntityId: SCHEMA_IDS.article(CASE_STUDY_PATH),
+    hasBreadcrumb: true,
+  }),
+  articleNode({
+    type: "Article",
+    path: CASE_STUDY_PATH,
+    headline: "Auto Parts CRM Case Study",
+    description: metadata.description ?? undefined,
+  }),
+  breadcrumbNode(CASE_STUDY_PATH, [
+    { name: "Home", path: "/" },
+    { name: "Case Studies", path: "/case-studies/" },
+    { name: "Auto Parts CRM", path: CASE_STUDY_PATH },
+  ])
+);
 
 const arrow = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -170,7 +186,7 @@ export default function AutoPartsCrmCaseStudy() {
     <>
       <ScrollAnimator />
       <SiteHeader active="case-studies" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyJsonLd) }} />
+      <JsonLd data={caseStudyJsonLd} />
 
       <main className="cs-main">
         {/* ---------------------------------------- title + meta ---------- */}

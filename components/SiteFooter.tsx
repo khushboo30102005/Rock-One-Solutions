@@ -1,6 +1,23 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { serviceCategories } from "@/app/services/services-data";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import { SOCIAL_PROFILES } from "@/lib/schema/site";
+
+const socialIcons: Record<(typeof SOCIAL_PROFILES)[number]["name"], ReactNode> = {
+  LinkedIn: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-3.93z" />
+    </svg>
+  ),
+  Instagram: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  ),
+};
 
 const footerServiceGroups = serviceCategories.map((category) => ({
   name: category.name,
@@ -61,6 +78,20 @@ export default function SiteFooter() {
               Layout, Bangalore - 560102, India
             </span>
             <span>GSTIN:- 29PAVPS8370D1ZI</span>
+            <div className="footer-social">
+              {SOCIAL_PROFILES.map((profile) => (
+                <a
+                  key={profile.name}
+                  href={profile.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Rock One Solutions on ${profile.name}`}
+                >
+                  {socialIcons[profile.name]}
+                  {profile.name}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

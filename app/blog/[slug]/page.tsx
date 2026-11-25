@@ -9,6 +9,9 @@ import {
   type BlogBlock
 } from "../blog-data";
 import { getAllBlogSlugs, getBlogPostBySlug, getAllBlogPosts } from "@/lib/sanity.content";
+import JsonLd from "@/components/JsonLd";
+import { articleNode, breadcrumbNode, faqPageNode, graph, webPageNode } from "@/lib/schema/builders";
+import { DEFAULT_SHARE_IMAGE, SCHEMA_IDS } from "@/lib/schema/site";
 import "../blog.css";
 
 export async function generateStaticParams() {
@@ -120,45 +123,37 @@ export default async function BlogPostPage({
     (p) => p.slug !== post.slug && p.category !== post.category
   );
   const related = [...sameCategory, ...others].slice(0, 3);
-  const canonicalUrl = `https://rockonesolutions.com/blog/${post.slug}/`;
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
-    image: post.socialImage
-      ? `https://rockonesolutions.com${post.socialImage}`
-      : undefined,
-    datePublished: post.date,
-    dateModified: post.updatedDate ?? post.date,
-    author: {
-      "@type": "Organization",
-      name: post.author,
-      url: "https://rockonesolutions.com/"
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Rock One Solutions",
-      url: "https://rockonesolutions.com/"
-    },
-    mainEntityOfPage: canonicalUrl
-  };
-  const faqSchema = post.faqs?.length
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: post.faqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faq.answer
-          }
-        }))
-      }
-    : null;
-  const schemaJson = (value: object) =>
-    JSON.stringify(value).replace(/</g, "\\u003c");
+  const path = `/blog/${post.slug}/`;
+  const postSchema = graph(
+    webPageNode({
+      path,
+      name: `${post.title} | Rock One Solutions`,
+      description: post.excerpt,
+      mainEntityId: SCHEMA_IDS.article(path),
+      image: post.heroImage?.src,
+      hasBreadcrumb: true,
+    }),
+    articleNode({
+      type: "BlogPosting",
+      path,
+      headline: post.title,
+      description: post.excerpt,
+      // Same fallback the page's og:image already uses when a post has no image.
+      images: post.heroImage || post.socialImage
+        ? [post.heroImage?.src, post.socialImage]
+        : [DEFAULT_SHARE_IMAGE],
+      datePublished: post.date,
+      dateModified: post.updatedDate,
+      author: post.author,
+      articleSection: post.category,
+    }),
+    breadcrumbNode(path, [
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog/" },
+      { name: post.title, path },
+    ]),
+    faqPageNode(path, post.faqs ?? [])
+  );
 
   return (
     <>
@@ -166,16 +161,7 @@ export default async function BlogPostPage({
 
       <main className="blog-post-main">
         <article className="blog-post">
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: schemaJson(articleSchema) }}
-          />
-          {faqSchema && (
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: schemaJson(faqSchema) }}
-            />
-          )}
+          <JsonLd data={postSchema} />
 
           <header className="blog-post-head">
             <nav className="blog-crumbs" aria-label="Breadcrumb">

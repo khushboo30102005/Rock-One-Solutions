@@ -5,6 +5,9 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { crmProjectScreens, type CrmProjectScreen } from "../work-data";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbNode, graph, webPageNode } from "@/lib/schema/builders";
+import { SCHEMA_IDS, absoluteUrl } from "@/lib/schema/site";
 import "../work.css";
 
 export const metadata: Metadata = {
@@ -30,21 +33,32 @@ const productMap = [
 
 const replacementSteps = ["Request recorded", "Yard contacted", "Response agreed", "Replacement shipped", "Delivery confirmed"];
 
-const productJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Auto Parts CRM",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  description:
-    "A role-based CRM for auto-parts sales, invoicing, shipment tracking, replacement orders, and team access.",
-  creator: {
-    "@type": "Organization",
-    name: "Rock One Solutions",
-    url: "https://rockonesolutions.com"
+const PRODUCT_PATH = "/work/auto-parts-crm/";
+
+const productJsonLd = graph(
+  webPageNode({
+    path: PRODUCT_PATH,
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+    mainEntityId: `${absoluteUrl(PRODUCT_PATH)}#software`,
+    hasBreadcrumb: true,
+  }),
+  {
+    "@type": "SoftwareApplication",
+    "@id": `${absoluteUrl(PRODUCT_PATH)}#software`,
+    name: "Auto Parts CRM",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description:
+      "A role-based CRM for auto-parts sales, invoicing, shipment tracking, replacement orders, and team access.",
+    creator: { "@id": SCHEMA_IDS.organization },
+    url: absoluteUrl(PRODUCT_PATH),
   },
-  url: "https://rockonesolutions.com/work/auto-parts-crm/"
-};
+  breadcrumbNode(PRODUCT_PATH, [
+    { name: "Work", path: "/work/" },
+    { name: "Auto Parts CRM", path: PRODUCT_PATH },
+  ])
+);
 
 function ProductStage({ image, eager = false }: { image: CrmProjectScreen; eager?: boolean }) {
   return (
@@ -96,7 +110,7 @@ export default function AutoPartsCrmProject() {
     <>
       <ScrollAnimator />
       <SiteHeader active="work" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      <JsonLd data={productJsonLd} />
       <main className="work-main product-page">
         <section className="product-hero">
           <nav className="work-breadcrumb" aria-label="Breadcrumb">

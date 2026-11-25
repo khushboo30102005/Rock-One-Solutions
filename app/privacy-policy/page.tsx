@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import JsonLd from "@/components/JsonLd";
+import { graph, webPageNode } from "@/lib/schema/builders";
 import "./privacy-policy.css";
 
 export const metadata: Metadata = {
@@ -16,9 +18,18 @@ export const metadata: Metadata = {
   },
 };
 
+const privacySchema = graph(
+  webPageNode({
+    path: "/privacy-policy/",
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+  })
+);
+
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <JsonLd data={privacySchema} />
       <SiteHeader />
       <main className="privacy-main">
         <section className="privacy-hero" aria-labelledby="privacy-title">

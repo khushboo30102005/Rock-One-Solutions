@@ -6,6 +6,8 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { websiteLaunches as localWebsiteLaunches, workProjects as localWorkProjects } from "./work-data";
 import { getAllWorkProjects, getWebsiteLaunches } from "@/lib/sanity.content";
+import JsonLd from "@/components/JsonLd";
+import { graph, webPageNode } from "@/lib/schema/builders";
 import "./work.css";
 
 export const metadata: Metadata = {
@@ -21,12 +23,22 @@ export const metadata: Metadata = {
   }
 };
 
+const workSchema = graph(
+  webPageNode({
+    type: "CollectionPage",
+    path: "/work/",
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+  })
+);
+
 export default async function WorkPage() {
   const workProjects = await getAllWorkProjects();
   const websiteLaunches = getWebsiteLaunches();
 
   return (
     <>
+      <JsonLd data={workSchema} />
       <ScrollAnimator />
       <SiteHeader active="work" />
       <main className="work-main">

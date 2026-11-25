@@ -4,6 +4,8 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import JsonLd from "@/components/JsonLd";
+import { graph, webPageNode } from "@/lib/schema/builders";
 import { pillarOrder, pillarPages, type PillarPage } from "@/app/rock-one-pillars-data";
 
 const arrow = (
@@ -17,8 +19,18 @@ export default function RockOnePillarPage({ page }: { page: PillarPage }) {
     .map((slug) => pillarPages[slug])
     .filter((item) => item.slug !== page.slug);
 
+  const pillarSchema = graph(
+    webPageNode({
+      path: `/${page.slug}/`,
+      name: `${page.label} | Rock One Solutions`,
+      description: page.description,
+      image: page.image,
+    })
+  );
+
   return (
     <>
+      <JsonLd data={pillarSchema} />
       <ScrollAnimator />
       <SiteHeader active="services" />
 

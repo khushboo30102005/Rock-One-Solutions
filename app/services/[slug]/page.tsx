@@ -17,6 +17,17 @@ import {
   relatedServices,
 } from "../services-data";
 import "../services.css";
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbNode,
+  faqPageNode,
+  faqsFromQa,
+  graph,
+  serviceNode,
+  stripBrandSuffix,
+  webPageNode,
+} from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
 
 export function generateStaticParams() {
   return allServices.map(({ service }) => ({ slug: service.slug }));
@@ -116,8 +127,34 @@ export default async function ServiceDetailPage({
     };
   }
 
+  const path = `/services/${service.slug}/`;
+  const serviceName = stripBrandSuffix(service.title);
+  const serviceSchema = graph(
+    webPageNode({
+      path,
+      name: `${serviceName} | Rock One Solutions`,
+      description: service.summary,
+      mainEntityId: SCHEMA_IDS.service(path),
+      hasBreadcrumb: true,
+    }),
+    serviceNode({
+      path,
+      name: serviceName,
+      description: service.summary,
+      serviceType: category.name,
+      image: service.image,
+    }),
+    breadcrumbNode(path, [
+      { name: "Home", path: "/" },
+      { name: "Services", path: "/services/" },
+      { name: serviceName, path },
+    ]),
+    faqPageNode(path, faqsFromQa(faqs))
+  );
+
   return (
     <>
+      <JsonLd data={serviceSchema} />
       <SiteHeader active="services" />
 
       <main

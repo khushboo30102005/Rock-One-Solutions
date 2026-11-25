@@ -3,7 +3,18 @@ import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import TrackedContactLink from "@/components/TrackedContactLink";
+import JsonLd from "@/components/JsonLd";
 import {
+  faqPageNode,
+  faqsFromQa,
+  graph,
+  itemListNode,
+  stripBrandSuffix,
+  webPageNode,
+} from "@/lib/schema/builders";
+import { SCHEMA_IDS } from "@/lib/schema/site";
+import {
+  allServices,
   processSteps,
   serviceCategories,
   servicesFaqs,
@@ -39,9 +50,28 @@ const arrow = (
   </svg>
 );
 
+const servicesSchema = graph(
+  webPageNode({
+    type: "CollectionPage",
+    path: "/services/",
+    name: metadata.title as string,
+    description: metadata.description ?? undefined,
+    mainEntityId: SCHEMA_IDS.itemList("/services/"),
+  }),
+  itemListNode(
+    "/services/",
+    allServices.map(({ service }) => ({
+      name: stripBrandSuffix(service.title),
+      path: `/services/${service.slug}/`,
+    }))
+  ),
+  faqPageNode("/services/", faqsFromQa(servicesFaqs))
+);
+
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={servicesSchema} />
       <SiteHeader active="services" />
 
       <main className="services-main">
