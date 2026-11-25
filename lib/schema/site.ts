@@ -10,6 +10,9 @@ export const SITE_NAME = "Rock One Solutions";
 export const SITE_DESCRIPTION =
   "Transform your business operations with Rock One Solutions. We specialize in custom CRM systems, AI Voice Agents, dedicated remote teams, and custom web & software development.";
 
+/** Official square logo (500×500 PNG) used for Organization `logo` / `image`. */
+export const LOGO = { path: "/logo.png", width: 500, height: 500 } as const;
+
 /** Site-wide default social image (matches the root layout's openGraph image). */
 export const DEFAULT_SHARE_IMAGE = "/rock-one-hero-showcase.png";
 
@@ -46,6 +49,7 @@ export function absoluteUrl(path = "/"): string {
 export const SCHEMA_IDS = {
   organization: `${SITE_URL}/#organization`,
   website: `${SITE_URL}/#website`,
+  logo: `${SITE_URL}/#logo`,
   webPage: (path: string) => `${absoluteUrl(path)}#webpage`,
   breadcrumb: (path: string) => `${absoluteUrl(path)}#breadcrumb`,
   service: (path: string) => `${absoluteUrl(path)}#service`,

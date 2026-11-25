@@ -4,7 +4,7 @@
  * (Organization, WebSite) are emitted once in the root layout — page builders
  * only reference them by @id.
  */
-import { BUSINESS, SCHEMA_IDS, SITE_DESCRIPTION, SITE_NAME, SITE_URL, absoluteUrl } from "./site";
+import { BUSINESS, LOGO, SCHEMA_IDS, SITE_DESCRIPTION, SITE_NAME, SITE_URL, absoluteUrl } from "./site";
 
 type JsonPrimitive = string | number | boolean;
 type JsonValue = JsonPrimitive | JsonValue[] | { [key: string]: JsonValue | undefined };
@@ -47,6 +47,16 @@ export function organizationNode(): SchemaNode {
     name: BUSINESS.name,
     url: `${SITE_URL}/`,
     description: SITE_DESCRIPTION,
+    logo: {
+      "@type": "ImageObject",
+      "@id": SCHEMA_IDS.logo,
+      url: `${SITE_URL}${LOGO.path}`,
+      contentUrl: `${SITE_URL}${LOGO.path}`,
+      width: LOGO.width,
+      height: LOGO.height,
+      caption: BUSINESS.name,
+    },
+    image: `${SITE_URL}${LOGO.path}`,
     telephone: BUSINESS.telephone,
     email: BUSINESS.email,
     address: { "@type": "PostalAddress", ...BUSINESS.address },
