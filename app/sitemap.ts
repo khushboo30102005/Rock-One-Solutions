@@ -14,6 +14,7 @@ const staticPaths = [
   "/services/",
   "/pricing/",
   "/remote-tech-team/",
+  "/creator-partners/",
   "/contact/",
   "/privacy-policy/",
   "/blog/",

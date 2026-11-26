@@ -62,6 +62,7 @@ export default function SiteFooter() {
             <Link href="/work">Work</Link>
             <Link href="/case-studies">Case Studies</Link>
             <Link href="/remote-tech-team">Remote Team</Link>
+            <Link href="/creator-partners">Creators</Link>
             <Link href="/about">About</Link>
             <Link href="/blog">Blog</Link>
             <Link href="/pricing">Pricing</Link>
