@@ -28,6 +28,8 @@ export type Creator = {
   niche: string;
   /** Website Rock One built for the creator. */
   website?: { label: string; url: string };
+  /** Square avatar in /public (e.g. "/creators/name.webp"). Initials are shown when absent. */
+  photo?: string;
   channels: CreatorChannel[];
 };
 
@@ -39,6 +41,7 @@ export const creators: Creator[] = [
     name: "Mr JD Gaming",
     niche: "Gaming",
     website: { label: "mrjdgaming.com", url: "https://mrjdgaming.com/" },
+    photo: "/creators/mr-jd-gaming.webp",
     channels: [
       {
         platform: "instagram",
@@ -56,15 +59,10 @@ export const creators: Creator[] = [
     ],
   },
   {
-    name: "Nitin Games",
-    niche: "Gaming",
-    website: { label: "nitingames.tech", url: "https://nitingames.tech/" },
-    channels: [],
-  },
-  {
     name: "Mr Bhahuk",
     niche: "Gaming",
     website: { label: "bhahukgaming.com", url: "https://bhahukgaming.com/" },
+    photo: "/creators/mr-bhahuk.webp",
     channels: [
       {
         platform: "instagram",
@@ -81,6 +79,7 @@ export const creators: Creator[] = [
     realName: "Shubham",
     niche: "Gaming",
     website: { label: "hellosplays.com", url: "https://hellosplays.com/" },
+    photo: "/creators/hellosplays.webp",
     channels: [
       {
         platform: "instagram",
@@ -95,6 +94,8 @@ export const creators: Creator[] = [
     name: "Game Review",
     realName: "Nitin",
     niche: "Gaming",
+    website: { label: "nitingames.tech", url: "https://nitingames.tech/" },
+    photo: "/creators/game-review.webp",
     channels: [
       {
         platform: "instagram",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import HeroBackgroundScene from "@/components/HeroBackgroundScene";
 import JsonLd from "@/components/JsonLd";
@@ -7,7 +8,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import TrackedContactLink from "@/components/TrackedContactLink";
 import { faqPageNode, graph, serviceNode, webPageNode } from "@/lib/schema/builders";
-import { BUSINESS, SCHEMA_IDS, SOCIAL_PROFILES } from "@/lib/schema/site";
+import { BUSINESS, SCHEMA_IDS } from "@/lib/schema/site";
 import {
   AUDIENCE_AS_OF,
   creatorAudience,
@@ -24,9 +25,7 @@ import {
   CheckIcon,
   GlobeIcon,
   InstagramIcon,
-  LinkedInIcon,
-  MailIcon,
-  PhoneIcon,
+  WhatsAppIcon,
   nicheIcons,
   platformIcons,
 } from "./icons";
@@ -35,8 +34,8 @@ import "./creator-partners.css";
 
 const PATH = "/creator-partners/";
 const INSTAGRAM_DM = "https://ig.me/m/rockonesolutions";
-const INSTAGRAM_PROFILE = SOCIAL_PROFILES.find((p) => p.name === "Instagram")!.url;
-const LINKEDIN_PROFILE = SOCIAL_PROFILES.find((p) => p.name === "LinkedIn")!.url;
+const WHATSAPP_CHAT =
+  "https://wa.me/918197731627?text=Hi%2C%20I%27m%20a%20creator%20and%20I%27d%20like%20a%20website";
 const GSTIN = "29PAVPS8370D1ZI";
 
 export const metadata: Metadata = {
@@ -136,9 +135,14 @@ const terms = [
   },
   { label: "Domain ownership", value: "Yours", note: "Registered in your name from day one." },
   {
-    label: "AdSense approval",
-    value: "Google decides",
-    note: "We build the site to meet Google's requirements and help you apply.",
+    label: "AdSense-ready",
+    value: "From day one",
+    note: "Yes! Your website will be built with AdSense readiness in mind from the very first day.",
+  },
+  {
+    label: "Our share",
+    value: "Revenue share",
+    note: "An agreed percentage of the revenue your website earns. We earn when you earn.",
   },
 ];
 
@@ -152,16 +156,20 @@ const faqs = [
     a: "No long writing needed. We plan the pages with you and shape them around what you already make: your videos, posts and ideas. You approve everything before it goes live.",
   },
   {
-    q: "How much will I earn from ads?",
-    a: "We cannot promise a figure, and anyone who does is guessing. Ad income depends on your traffic, your niche, where your audience is, and Google's own approval. We build the site to meet AdSense requirements and help you apply.",
+    q: "How much can I earn?",
+    a: "Your website will be monetization-ready from day one, giving you the opportunity to start earning and potentially exceed your expectations as your traffic grows.",
+  },
+  {
+    q: "How does Rock One Solutions earn money?",
+    a: "We work on a revenue-sharing model. Instead of charging website development or management fees, we earn an agreed percentage of the revenue generated through your website. This means we grow together—when you earn, we earn.",
   },
   {
     q: "Is it really free?",
-    a: "There is no development fee and no website management fee. The only cost is the domain, about ₹1,000, which you pay directly to the domain provider. It never goes through our account, and the domain is yours.",
+    a: "There is no development fee and no website management fee. We earn only through an agreed share of your website's revenue. The only upfront cost is the domain, about ₹1,000, which you pay directly to the domain provider. It never goes through our account, and the domain is yours.",
   },
   {
     q: "How do I start?",
-    a: "Send us a DM on Instagram at @rockonesolutions, or fill in the Start a Project form. We will have a quick chat about your page and take it from there.",
+    a: "Send us a DM on Instagram at @rockonesolutions, or message us on WhatsApp. We will have a quick chat about your page and take it from there.",
   },
 ];
 
@@ -193,6 +201,12 @@ function initials(name: string) {
     .join("");
 }
 
+/** Creator photo when we have one, otherwise their initials. */
+function CreatorAvatar({ creator }: { creator: Creator }) {
+  if (!creator.photo) return <>{initials(creator.name)}</>;
+  return <Image src={creator.photo} alt="" width={104} height={104} />;
+}
+
 /** Creators with a Rock One website first, then by audience size. */
 const orderedCreators = [...creators].sort(
   (a, b) =>
@@ -215,7 +229,7 @@ function CreatorCard({ creator, index }: { creator: Creator; index: number }) {
       <article className="cp-creator cp-fx" data-fx-card style={{ ["--cp-tone" as string]: index }}>
         <header className="cp-creator-head">
           <span className="cp-creator-mark" aria-hidden="true">
-            {initials(creator.name)}
+            <CreatorAvatar creator={creator} />
           </span>
           <div>
             <h3>{creator.name}</h3>
@@ -346,14 +360,22 @@ export default function CreatorPartnersPage() {
                   <InstagramIcon />
                   Message us on Instagram
                 </a>
-                <Link className="cp-btn cp-btn-outline" href="/contact">
-                  Start a Project <ArrowIcon />
-                </Link>
+                <TrackedContactLink
+                  className="cp-btn cp-btn-outline"
+                  href={WHATSAPP_CHAT}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WhatsAppIcon />
+                  Chat on WhatsApp
+                </TrackedContactLink>
               </div>
               <div className="cp-hero-proof">
                 <span className="cp-avatar-stack" aria-hidden="true">
                   {orderedCreators.map((creator) => (
-                    <i key={creator.name}>{initials(creator.name)}</i>
+                    <i key={creator.name}>
+                      <CreatorAvatar creator={creator} />
+                    </i>
                   ))}
                 </span>
                 <span>
@@ -392,7 +414,9 @@ export default function CreatorPartnersPage() {
 
               {featuredCreators.map((creator, index) => (
                 <div className={`cp-chip cp-chip-${index + 1}`} key={creator.name}>
-                  <i>{initials(creator.name)}</i>
+                  <i>
+                    <CreatorAvatar creator={creator} />
+                  </i>
                   <span>
                     <b>{creator.name}</b>
                     <small>{formatAudienceFloor(creatorAudience(creator))} audience</small>
@@ -610,28 +634,18 @@ export default function CreatorPartnersPage() {
             <div className="cp-contact-copy">
               <span className="cp-label">(Let&rsquo;s talk)</span>
               <h2 id="cp-contact-title">Ready for a site of your own?</h2>
-              <p>Pick whichever is easiest. A DM on Instagram is usually the quickest.</p>
+              <p>Message us on Instagram or WhatsApp, whichever you use most.</p>
             </div>
             <div className="cp-contact-grid">
-              <a href={INSTAGRAM_PROFILE} target="_blank" rel="noopener noreferrer">
+              <a href={INSTAGRAM_DM} target="_blank" rel="noopener noreferrer">
                 <InstagramIcon />
                 <span>Instagram</span>
-                <strong>@rockonesolutions</strong>
+                <strong>Message @rockonesolutions</strong>
               </a>
-              <a href={LINKEDIN_PROFILE} target="_blank" rel="noopener noreferrer">
-                <LinkedInIcon />
-                <span>LinkedIn</span>
-                <strong>Rock One Solutions</strong>
-              </a>
-              <TrackedContactLink href={`mailto:${BUSINESS.email}`}>
-                <MailIcon />
-                <span>Email</span>
-                <strong>{BUSINESS.email}</strong>
-              </TrackedContactLink>
-              <TrackedContactLink href="tel:+918197731627">
-                <PhoneIcon />
-                <span>Phone</span>
-                <strong>{BUSINESS.telephone}</strong>
+              <TrackedContactLink href={WHATSAPP_CHAT} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon />
+                <span>WhatsApp</span>
+                <strong>Chat with us</strong>
               </TrackedContactLink>
             </div>
           </div>

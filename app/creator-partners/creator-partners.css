@@ -2021,3 +2021,20 @@
     transition: none;
   }
 }
+
+/* Creator photos ---------------------------------------------------------- */
+
+.cp-avatar-stack i,
+.cp-chip > i,
+.cp-creator-mark {
+  overflow: hidden;
+}
+
+.cp-avatar-stack i img,
+.cp-chip > i img,
+.cp-creator-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
