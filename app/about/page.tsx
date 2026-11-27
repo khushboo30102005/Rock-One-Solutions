@@ -12,13 +12,13 @@ import { SCHEMA_IDS } from "@/lib/schema/site";
 import "./about.css";
 
 export const metadata: Metadata = {
-  title: "About Us | Leading Tech & AI Solutions Partner | Rock One Solutions",
+  title: "About Rock One Solutions | CRM, AI & Software Solutions",
   description:
-    "Learn about Rock One Solutions. We empower growing businesses with custom CRM systems, AI Voice Agents, dedicated remote teams, and scalable software solutions.",
+    "Learn about Rock One Solutions, providing custom CRM development, AI voice agents and dedicated remote teams for growing businesses.",
   openGraph: {
-    title: "About Us | Leading Tech & AI Solutions Partner | Rock One Solutions",
+    title: "About Rock One Solutions | CRM, AI & Software Solutions",
     description:
-      "Learn about Rock One Solutions. We empower growing businesses with custom CRM systems, AI Voice Agents, dedicated remote teams, and scalable software solutions.",
+      "Learn about Rock One Solutions, providing custom CRM development, AI voice agents and dedicated remote teams for growing businesses.",
     url: "https://rockonesolutions.com/about/",
   },
 };

@@ -29,6 +29,9 @@ export type BlogPost = {
     caption: string;
   };
   socialImage?: string;
+  /** Optional SEO overrides for the <title> tag and meta description. */
+  seoTitle?: string;
+  seoDescription?: string;
   faqs?: BlogFaq[];
   body: BlogBlock[];
 };
@@ -38,6 +41,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "open-source-crm-software-for-small-business",
     title: "Open source CRM software for a small business still running follow-ups from sheets",
+    seoTitle: "Open Source CRM for Small Business | Rock One Solutions",
     cardTitle: "When sheets and follow-ups need one CRM",
     excerpt:
       "Small and mid-size teams comparing open source CRM software with Excel, shared folders, and Canva: what belongs in one system and what a first build should cover.",
@@ -243,6 +247,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "turning-campaigns-into-measurable-handoffs",
     title: "Turning campaigns into measurable hand-offs",
+    seoTitle: "Turning Campaigns into Measurable Hand-Offs | Rock One",
     excerpt:
       "The gap between a click and a salesperson picking up the phone is where most marketing budgets quietly disappear.",
     category: "Automation",
@@ -286,6 +291,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "using-automation-where-it-actually-helps",
     title: "Using automation where it actually helps",
+    seoTitle: "Where Business Automation Helps | Rock One Solutions",
     excerpt:
       "Automating a broken process gives you a broken process that runs faster. Here is how to choose what to automate first.",
     category: "Growth",
@@ -328,6 +334,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "what-ai-agents-are-actually-good-at",
     title: "What AI agents are actually good at in a business workflow",
+    seoTitle: "What AI Agents Are Good at in Business Workflows",
     excerpt:
       "Beyond the demos: the narrow, boring places where an AI agent earns its keep — and the places it will cost you.",
     category: "AI",
@@ -411,6 +418,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "performance-marketing-measured-against-pipeline",
     title: "Performance marketing, measured against pipeline",
+    seoTitle: "Performance Marketing Strategy: Measuring Pipeline Impact",
     excerpt:
       "Cost per lead is a comfortable number. Cost per qualified opportunity is the one that decides whether the channel survives.",
     category: "Performance",
@@ -456,6 +464,7 @@ export const blogPosts: BlogPost[] = [
 {
     slug: "scale-tech-infrastructure-dedicated-remote-teams",
     title: "How to Scale Your Tech Infrastructure with Dedicated Remote Teams Without Quality Compromise",
+    seoTitle: "Scaling Tech Infrastructure with Dedicated Remote Teams",
     cardTitle: "Scaling tech infrastructure with dedicated remote teams",
     excerpt:
       "Learn how growing tech companies scale engineering infrastructure using dedicated remote teams without sacrificing code quality, velocity, or control.",

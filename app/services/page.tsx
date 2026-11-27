@@ -23,14 +23,14 @@ import {
 import "./services.css";
 
 export const metadata: Metadata = {
-  title: "Services | Rock One Solutions",
+  title: "CRM, AI & Software Development Services | Rock One Solutions",
   description:
-    "Websites, custom software, CRM/ERP, automation, SEO, and paid media — Rock One Solutions covers the full journey from design and build to automation and growth.",
+    "Custom CRM and ERP systems, AI voice agents, workflow automation, remote tech teams, websites, apps and SEO from Rock One Solutions.",
   alternates: { canonical: "/services/" },
   openGraph: {
-    title: "Services | Rock One Solutions",
+    title: "CRM, AI & Software Development Services | Rock One Solutions",
     description:
-      "Websites, custom software, CRM/ERP, automation, SEO, and paid media from one connected digital partner.",
+      "Custom CRM and ERP systems, AI voice agents, workflow automation, remote tech teams, websites, apps and SEO from Rock One Solutions.",
     url: "/services/",
     type: "website",
   },

@@ -16,7 +16,7 @@ export function getSanityClient(): SanityClient | null {
     projectId,
     dataset,
     apiVersion,
-    useCdn: true,
+    useCdn: false, // build-time only: always read fresh content, not the CDN cache
     token,
     perspective: "published", // never fetch drafts in production
   });

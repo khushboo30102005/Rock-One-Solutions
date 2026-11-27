@@ -11,12 +11,12 @@ import { graph, webPageNode } from "@/lib/schema/builders";
 import "./work.css";
 
 export const metadata: Metadata = {
-  title: "Work | Digital Products and Business Systems | Rock One Solutions",
+  title: "Our Work: CRM & Business Systems | Rock One Solutions",
   description:
     "Explore websites, CRM platforms, connected business systems, and remote team engagements delivered by Rock One Solutions.",
   alternates: { canonical: "/work/" },
   openGraph: {
-    title: "Work | Rock One Solutions",
+    title: "Our Work: CRM & Business Systems | Rock One Solutions",
     description:
       "Selected websites, digital products, operating systems, and remote team engagements delivered by Rock One Solutions.",
     url: "https://rockonesolutions.com/work/"

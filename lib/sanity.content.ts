@@ -217,6 +217,8 @@ function sanityBlogToLocal(s: SanityBlogPost): BlogPost {
         }
       : undefined,
     socialImage: s.socialImage?.asset?.url || undefined,
+    seoTitle: s.seoTitle?.trim() || undefined,
+    seoDescription: s.seoDescription?.trim() || undefined,
     faqs: s.faqs as BlogFaq[] | undefined,
     body: portableTextToBlocks(s.body || []),
   };

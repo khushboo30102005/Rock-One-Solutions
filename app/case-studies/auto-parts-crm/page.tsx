@@ -14,11 +14,12 @@ import "../../work/work.css";
 export const metadata: Metadata = {
   title: "Auto Parts CRM Case Study | Rock One Solutions",
   description:
-    "How Rock One Solutions designed and built the Auto Parts CRM for MEE Auto Parts — one workspace that carries a lead through quoting, orders, signed invoices, and shipment tracking.",
+    "How Rock One Solutions built an Auto Parts CRM for MEE Auto Parts that carries a lead from quote to order, signed invoice and shipment.",
   alternates: { canonical: "/case-studies/auto-parts-crm/" },
   openGraph: {
     title: "Auto Parts CRM Case Study | Rock One Solutions",
-    description: "The problem, product decisions, and operating model behind the Auto Parts CRM.",
+    description:
+      "How Rock One Solutions built an Auto Parts CRM for MEE Auto Parts that carries a lead from quote to order, signed invoice and shipment.",
     url: "https://rockonesolutions.com/case-studies/auto-parts-crm/"
   }
 };

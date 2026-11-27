@@ -10,14 +10,14 @@ import { SCHEMA_IDS } from "@/lib/schema/site";
 import "./contact.css";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Tech & AI Solutions Experts | Rock One Solutions",
+  title: "Contact Rock One Solutions | Custom CRM & AI Solutions",
   description:
-    "Ready to scale your business? Contact Rock One Solutions today to discuss your custom CRM, AI Voice Agent, remote team, software, or web development project.",
+    "Contact Rock One Solutions for custom CRM, AI voice agents, remote tech teams and custom website development services.",
   alternates: { canonical: "/contact/" },
   openGraph: {
-    title: "Contact Us | Tech & AI Solutions Experts | Rock One Solutions",
+    title: "Contact Rock One Solutions | Custom CRM & AI Solutions",
     description:
-      "Ready to scale your business? Contact Rock One Solutions today to discuss your custom CRM, AI Voice Agent, remote team, software, or web development project.",
+      "Contact Rock One Solutions for custom CRM, AI voice agents, remote tech teams and custom website development services.",
     url: "/contact/",
     type: "website",
   },

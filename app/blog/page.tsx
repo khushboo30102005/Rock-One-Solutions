@@ -10,12 +10,12 @@ import { SCHEMA_IDS } from "@/lib/schema/site";
 import "./blog.css";
 
 export const metadata: Metadata = {
-  title: "Blog | Rock One Solutions",
+  title: "Business & Technology Insights Blog | Rock One Solutions",
   description:
     "Practical notes on websites, custom software, CRM hand-offs, AI automation, and performance marketing — written for operators, not for search engines.",
   alternates: { canonical: "/blog/" },
   openGraph: {
-    title: "Blog | Rock One Solutions",
+    title: "Business & Technology Insights Blog | Rock One Solutions",
     description:
       "Practical notes on websites, custom software, CRM hand-offs, AI automation, and performance marketing.",
     url: "/blog/",

@@ -22,9 +22,9 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rockonesolutions.com"),
-  title: "Rock One Solutions | Custom CRM, AI Voice Agents & Tech Development",
+  title: "Custom CRM, AI Voice Agents & Software | Rock One Solutions",
   description:
-    "Transform your business operations with Rock One Solutions. We specialize in custom CRM systems, AI Voice Agents, dedicated remote teams, and custom web & software development.",
+    "Rock One Solutions builds custom CRM systems, AI voice agents, workflow automation and software, and provides dedicated remote tech teams.",
   alternates: {
     canonical: "./",
   },
@@ -36,9 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rock One Solutions | Custom CRM, AI Voice Agents & Tech Development",
-    description:
-      "Transform your business operations with Rock One Solutions. We specialize in custom CRM systems, AI Voice Agents, dedicated remote teams, and custom web & software development.",
+    // No title/description here: X falls back to each page's og:title / og:description.
     images: ["/rock-one-hero-showcase.png"],
   },
 };

@@ -135,7 +135,7 @@ const localClientLogos: ClientLogo[] = [
 const homeSchema = graph(
   webPageNode({
     path: "/",
-    name: "Rock One Solutions | Custom CRM, AI Voice Agents & Tech Development",
+    name: "Custom CRM, AI Voice Agents & Software | Rock One Solutions",
     description: SITE_DESCRIPTION,
   })
 );

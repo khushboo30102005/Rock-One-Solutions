@@ -9,6 +9,9 @@ export type Service = {
   imageAlt: string;
   tagline: string;
   summary: string;
+  /** Optional SEO overrides; fall back to "<title> | Rock One Solutions" and summary. */
+  metaTitle?: string;
+  metaDescription?: string;
   deliverables: string[];
   outcomes: string[];
   /** Optional per-service FAQ. Falls back to serviceDetailFaqs when absent. */
@@ -77,6 +80,9 @@ export const serviceCategories: ServiceCategory[] = [
         imageAlt: "UX and UI design workshop with prototype screens, journey maps, and color swatches",
         tagline: "Interfaces that feel intuitive and look unmistakably yours.",
         summary: "Transform your digital product with user-centric UX/UI web design. We craft high-converting interfaces, interactive wireframes, intuitive prototypes, and scalable design systems for web and mobile.",
+        metaTitle: "Conversion-Focused UX/UI Web Design | Rock One Solutions",
+        metaDescription:
+          "Conversion-focused UX/UI design for web and mobile, from wireframes and interactive prototypes to high-converting interfaces and design systems.",
         deliverables: [
           "User flows and wireframes",
           "High-fidelity UI and a reusable design system",
@@ -97,6 +103,8 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: "Turn a dated site into a modern growth asset.",
         summary:
           "A dated site with traffic should not be thrown away blindly. We rebuild the experience, preserve search equity, and hand over a cleaner site your team can run.",
+        metaDescription:
+          "We redesign outdated websites, preserve search value and improve performance with tailored SEO and digital solutions.",
         deliverables: [
           "UX, content, and performance audit",
           "Modern visual redesign",
@@ -155,6 +163,9 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: "Purpose-built tools that replace scattered spreadsheets.",
         summary:
           "Solve complex operational challenges with tailor-made software solutions from Rock One Solutions. Scalable ERPs, secure web portals, and database management.",
+        metaTitle: "Custom Software & ERP Development | Rock One Solutions",
+        metaDescription:
+          "Custom CRM development, scalable ERP systems, secure web portals and database management designed to streamline your business operations.",
         deliverables: [
           "Discovery and solution design",
           "Custom web application build",
@@ -175,6 +186,8 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: "Business apps built around real user journeys.",
         summary:
           "Transform your digital ideas into powerful iOS and Android apps. Rock One Solutions delivers user-centric, high-performance mobile app development services.",
+        metaDescription:
+          "Custom iOS and Android app development from Rock One Solutions, building user-friendly, high-performance mobile apps for your business.",
         deliverables: [
           "App strategy, user flows, and feature planning",
           "Responsive web app or mobile app interface",
@@ -195,6 +208,8 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: "Custom CRM Development & Business Lead Management Systems",
         summary:
           "Streamline your sales pipeline and customer management with custom CRM systems. Rock One Solutions builds tailored CRMs to automate workflows and drive business growth.",
+        metaDescription:
+          "Custom CRM systems tailored to your sales pipeline and customer management needs, with automated workflows that reduce manual follow-ups.",
         deliverables: [
           "Lead capture and pipeline setup",
           "Contact and account records",
@@ -234,6 +249,9 @@ export const serviceCategories: ServiceCategory[] = [
         imageAlt: "Workflow automation workspace showing form, email, CRM, and approval handoff planning",
         tagline: "Connect the steps and remove the busywork.",
         summary: "Eliminate manual tasks with custom business workflow automation. We seamlessly integrate CRMs, third-party apps, and web forms to streamline operations, save time, and prevent costly errors.",
+        metaTitle: "Business Workflow Automation Services | Rock One Solutions",
+        metaDescription:
+          "Custom workflow automation that connects web forms, CRM routing, instant alerts and follow-ups so your team spends less time on manual tasks.",
         deliverables: [
           "Workflow and trigger mapping",
           "Automated handoffs and alerts",
@@ -272,6 +290,8 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: "Attract organic, high-intent search traffic.",
         summary:
           "Boost your search engine rankings and organic traffic with data-driven Technical & Content SEO strategies. Comprehensive keyword research, on-page optimization, and technical SEO tailored for business growth.",
+        metaDescription:
+          "Improve search visibility with technical audits, keyword research and on-page optimization through tailored SEO & digital solutions for your business.",
         deliverables: [
           "Technical SEO audit and fixes",
           "Keyword and content strategy",
@@ -409,6 +429,8 @@ export const serviceCategories: ServiceCategory[] = [
         tagline: "Custom AI Voice Agent Development for Automated Business Calls & Leads",
         summary:
           "Automate inbound and outbound calls with custom AI Voice Agents from Rock One Solutions. Integrate instant booking, CRM logging, and smart lead qualification.",
+        metaDescription:
+          "Custom AI voice agents that handle inbound and outbound calls, book appointments, log calls to your CRM and qualify leads.",
         deliverables: [
           "Voice agent use-case and conversation planning",
           "Call flow, script, and fallback design",

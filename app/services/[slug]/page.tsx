@@ -42,13 +42,16 @@ export async function generateMetadata({
   const entry = getServiceBySlug(slug);
   if (!entry) return { title: "Service | Rock One Solutions" };
   const path = `/services/${entry.service.slug}/`;
+  const metaTitle =
+    entry.service.metaTitle ?? `${stripBrandSuffix(entry.service.title)} | Rock One Solutions`;
+  const metaDescription = entry.service.metaDescription ?? entry.service.summary;
   return {
-    title: `${entry.service.title} | Rock One Solutions`,
-    description: entry.service.summary,
+    title: metaTitle,
+    description: metaDescription,
     alternates: { canonical: path },
     openGraph: {
-      title: `${entry.service.title} | Rock One Solutions`,
-      description: entry.service.summary,
+      title: metaTitle,
+      description: metaDescription,
       url: path,
       type: "website",
     },

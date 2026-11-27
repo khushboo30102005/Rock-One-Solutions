@@ -8,12 +8,12 @@ const page = pillarPages["rock-one-agents-ai-consultation"];
 export const metadata: Metadata = {
   title: "AI Consultation & Voice Agent Strategy | Rock One Solutions",
   description:
-    "Transform your business with practical AI agents and AI Voice Agent strategies. Book an AI consultation with Rock One Solutions to automate workflows and sales.",
+    "Book an AI consultation with Rock One to find where AI agents and AI voice agents can automate workflows and sales tasks in your business.",
   alternates: { canonical: "/rock-one-agents-ai-consultation/" },
   openGraph: {
     title: "AI Consultation & Voice Agent Strategy | Rock One Solutions",
     description:
-      "Transform your business with practical AI agents and AI Voice Agent strategies. Book an AI consultation with Rock One Solutions to automate workflows and sales.",
+      "Book an AI consultation with Rock One to find where AI agents and AI voice agents can automate workflows and sales tasks in your business.",
     url: "/rock-one-agents-ai-consultation/",
     type: "website",
   },

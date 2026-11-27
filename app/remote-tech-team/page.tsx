@@ -14,12 +14,12 @@ import "./remote-tech-team.css";
 export const metadata: Metadata = {
   title: "Hire Dedicated Remote Tech Teams | Rock One Solutions",
   description:
-    "Scale your development and operational capacity with skilled remote tech teams from Rock One Solutions. Dedicated technical support for CRM, web, app, and automation projects.",
+    "Scale development capacity with dedicated remote tech teams for CRM, web, app and automation projects.",
   alternates: { canonical: "/remote-tech-team/" },
   openGraph: {
     title: "Hire Dedicated Remote Tech Teams | Rock One Solutions",
     description:
-      "Scale your development and operational capacity with skilled remote tech teams from Rock One Solutions. Dedicated technical support for CRM, web, app, and automation projects.",
+      "Scale development capacity with dedicated remote tech teams for CRM, web, app and automation projects.",
     url: "/remote-tech-team/",
     type: "website",
   },

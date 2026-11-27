@@ -33,18 +33,20 @@ export async function generateMetadata({
 
   const canonical = `/blog/${post.slug}/`;
   const socialImage = post.socialImage ?? post.heroImage?.src;
+  const metaTitle = post.seoTitle ?? `${post.title} | Rock One Solutions`;
+  const metaDescription = post.seoDescription ?? post.excerpt;
 
   return {
-    title: `${post.title} | Rock One Solutions`,
-    description: post.excerpt,
+    title: metaTitle,
+    description: metaDescription,
     alternates: {
       canonical
     },
     openGraph: {
       type: "article",
       url: canonical,
-      title: post.title,
-      description: post.excerpt,
+      title: metaTitle,
+      description: metaDescription,
       publishedTime: post.date,
       modifiedTime: post.updatedDate ?? post.date,
       authors: [post.author],
@@ -59,8 +61,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title: metaTitle,
+      description: metaDescription,
       images: socialImage ? [socialImage] : undefined
     }
   };
@@ -127,8 +129,8 @@ export default async function BlogPostPage({
   const postSchema = graph(
     webPageNode({
       path,
-      name: `${post.title} | Rock One Solutions`,
-      description: post.excerpt,
+      name: post.seoTitle ?? `${post.title} | Rock One Solutions`,
+      description: post.seoDescription ?? post.excerpt,
       mainEntityId: SCHEMA_IDS.article(path),
       image: post.heroImage?.src,
       hasBreadcrumb: true,

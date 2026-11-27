@@ -13,11 +13,12 @@ import "../work.css";
 export const metadata: Metadata = {
   title: "Auto Parts CRM Project | Rock One Solutions",
   description:
-    "Explore the Auto Parts CRM built by Rock One Solutions: dashboards, leads, orders, invoicing, shipments, replacements, user management, and role-based access.",
+    "Explore the Auto Parts CRM built by Rock One Solutions: dashboards, leads, orders, invoicing, shipments, replacements and role-based access.",
   alternates: { canonical: "/work/auto-parts-crm/" },
   openGraph: {
     title: "Auto Parts CRM Project | Rock One Solutions",
-    description: "A complete product tour of the connected Auto Parts CRM.",
+    description:
+      "Explore the Auto Parts CRM built by Rock One Solutions: dashboards, leads, orders, invoicing, shipments, replacements and role-based access.",
     url: "https://rockonesolutions.com/work/auto-parts-crm/",
   }
 };
