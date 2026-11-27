@@ -1,0 +1,723 @@
+/* Homepage "What can we do for you" — full-width auto-sliding service cards. */
+
+.wwd {
+  --wwd-ink: var(--alex-black, #0b0d10);
+  --wwd-muted: #5d6675;
+  --wwd-faint: #9aa1ad;
+  --wwd-line: rgba(11, 13, 16, 0.1);
+  --wwd-accent: var(--alex-orange, #ed3d21);
+  --wwd-ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --wwd-slide-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  display: grid;
+  gap: clamp(22px, 2.6vw, 34px);
+  background: #ffffff;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+.wwd-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.wwd-heading {
+  display: grid;
+  gap: 14px;
+}
+
+.wwd-header h2 {
+  margin: 0;
+  max-width: 680px;
+  color: var(--wwd-ink);
+  font-size: clamp(2rem, 3.2vw, 3.1rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+.wwd-header h2 em {
+  font-style: normal;
+  color: var(--wwd-accent);
+}
+
+.wwd-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+
+.wwd-counter {
+  margin-right: 10px;
+  color: var(--wwd-faint);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.wwd-counter strong {
+  display: inline-block;
+  color: var(--wwd-ink);
+  font-weight: 800;
+  animation: wwd-rise 420ms var(--wwd-ease) both;
+}
+
+.wwd-arrow {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(11, 13, 16, 0.18);
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--wwd-ink);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms var(--wwd-ease);
+}
+
+.wwd-arrow:hover,
+.wwd-arrow:focus-visible {
+  border-color: var(--wwd-ink);
+  background: var(--wwd-ink);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ── Carousel ───────────────────────────────────────────── */
+
+.wwd-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  touch-action: pan-y;
+}
+
+/* Slides are stacked in one grid cell; only the outgoing and incoming slide
+   animate, which keeps the composited area to a single card. */
+.wwd-track {
+  display: grid;
+}
+
+/* ── Slide (the card) ───────────────────────────────────── */
+
+.wwd-slide {
+  position: relative;
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 72px);
+  min-height: clamp(380px, 33vw, 430px);
+  padding: clamp(30px, 3.4vw, 52px) clamp(28px, 5vw, 76px) clamp(30px, 3.4vw, 52px) clamp(20px, 3vw, 48px);
+  border: 1px solid rgba(11, 13, 16, 0.08);
+  border-radius: 22px;
+  background:
+    radial-gradient(60% 85% at 22% 50%, rgba(28, 95, 184, 0.1), transparent 65%),
+    radial-gradient(55% 75% at 100% 100%, rgba(237, 61, 33, 0.07), transparent 60%),
+    linear-gradient(180deg, #fafbfc, #f3f5f8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 30px 60px -40px rgba(11, 13, 16, 0.35);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Fine dot grid that fades out from behind the artwork. */
+.wwd-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: radial-gradient(rgba(11, 13, 16, 0.09) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(55% 75% at 24% 50%, #000, transparent 72%);
+  mask-image: radial-gradient(55% 75% at 24% 50%, #000, transparent 72%);
+  pointer-events: none;
+}
+
+.wwd-slide {
+  transition:
+    transform 900ms var(--wwd-slide-ease),
+    opacity 700ms ease,
+    visibility 0s linear 900ms;
+}
+
+.wwd-slide.is-active {
+  z-index: 1;
+  transition:
+    transform 900ms var(--wwd-slide-ease),
+    opacity 700ms ease 120ms,
+    visibility 0s;
+}
+
+.wwd-slide.is-before {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-8%);
+}
+
+.wwd-slide.is-after {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(8%);
+}
+
+/* Soft light that follows the cursor. */
+.wwd-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    460px circle at var(--wwd-mx, 50%) var(--wwd-my, 50%),
+    rgba(255, 255, 255, 0.8),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+
+.wwd-slide.is-hover .wwd-spotlight {
+  opacity: 1;
+}
+
+/* ── Visual ─────────────────────────────────────────────── */
+
+.wwd-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  perspective: 900px;
+}
+
+/* Two thin rings orbiting behind the artwork. */
+.wwd-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.wwd-orbit-outer {
+  width: 360px;
+  height: 360px;
+  margin: -180px 0 0 -180px;
+  border: 1px solid rgba(28, 95, 184, 0.16);
+  animation: wwd-spin 38s linear infinite;
+}
+
+.wwd-orbit-outer i {
+  position: absolute;
+  top: 50%;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--wwd-accent);
+  box-shadow: 0 0 0 5px rgba(237, 61, 33, 0.14);
+}
+
+.wwd-orbit-inner {
+  width: 264px;
+  height: 264px;
+  margin: -132px 0 0 -132px;
+  border: 1px dashed rgba(11, 13, 16, 0.12);
+  animation: wwd-spin 60s linear infinite reverse;
+}
+
+.wwd-tilt {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  transform: rotateX(var(--wwd-rx, 0deg)) rotateY(var(--wwd-ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 500ms var(--wwd-ease);
+}
+
+.wwd-slide.is-hover .wwd-tilt {
+  transition-duration: 140ms;
+}
+
+.wwd-visual-glow {
+  position: absolute;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(28, 95, 184, 0.16), transparent 68%);
+  filter: blur(6px);
+}
+
+.wwd-visual img {
+  position: relative;
+  width: min(100%, 300px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+/* ── Copy ───────────────────────────────────────────────── */
+
+.wwd-copy {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  max-width: 500px;
+}
+
+.wwd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 10px;
+  border: 1px solid rgba(11, 13, 16, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--wwd-ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.wwd-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--wwd-accent);
+  box-shadow: 0 0 0 4px rgba(237, 61, 33, 0.14);
+}
+
+/* Capability tags */
+.wwd-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wwd-tags li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: rgba(11, 13, 16, 0.045);
+  color: #3a414d;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.wwd-tags li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--wwd-accent);
+}
+
+.wwd-title {
+  margin: 0;
+  color: var(--wwd-ink);
+  font-size: clamp(1.65rem, 2.35vw, 2.3rem);
+  font-weight: 560;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+}
+
+.wwd-word {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  vertical-align: top;
+}
+
+.wwd-word > span {
+  display: inline-block;
+}
+
+.wwd-copy p {
+  margin: 0;
+  max-width: 450px;
+  color: var(--wwd-muted);
+  font-size: 1rem;
+  line-height: 1.62;
+}
+
+.wwd-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 6px;
+  padding: 0 24px;
+  border-radius: 999px;
+  color: #ffffff !important;
+  background: var(--wwd-ink);
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 220ms var(--wwd-ease), box-shadow 220ms ease;
+}
+
+/* Orange fill that sweeps in on hover. */
+.wwd-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--wwd-accent);
+  transform: translateX(-101%);
+  transition: transform 380ms var(--wwd-ease);
+}
+
+.wwd-link span {
+  transition: transform 220ms var(--wwd-ease);
+}
+
+.wwd-link:hover,
+.wwd-link:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(237, 61, 33, 0.24);
+}
+
+.wwd-link:hover::before,
+.wwd-link:focus-visible::before {
+  transform: none;
+}
+
+.wwd-link:hover span,
+.wwd-link:focus-visible span {
+  transform: translateX(4px);
+}
+
+.wwd-link:focus-visible {
+  outline: 2px solid var(--wwd-ink);
+  outline-offset: 3px;
+}
+
+/* ── Slide-in choreography (re-runs each time a slide becomes active) ── */
+
+.wwd.is-in .wwd-slide.is-active .wwd-visual {
+  animation: wwd-visual-in 900ms var(--wwd-ease) 200ms both;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-visual img {
+  animation: wwd-float 6s ease-in-out 1.1s infinite;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-eyebrow {
+  animation: wwd-rise 600ms var(--wwd-ease) 250ms both;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-word > span {
+  animation: wwd-word-in 760ms var(--wwd-ease) both;
+  animation-delay: calc(320ms + var(--wwd-w, 0) * 45ms);
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-copy p {
+  animation: wwd-rise 640ms var(--wwd-ease) 560ms both;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-tags li {
+  animation: wwd-rise 560ms var(--wwd-ease) both;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-tags li:nth-child(1) {
+  animation-delay: 640ms;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-tags li:nth-child(2) {
+  animation-delay: 700ms;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-tags li:nth-child(3) {
+  animation-delay: 760ms;
+}
+
+.wwd.is-in .wwd-slide.is-active .wwd-link {
+  animation: wwd-rise 640ms var(--wwd-ease) 820ms both;
+}
+
+/* Entrance for the whole block, once (only when JS is running). */
+.motion-ready .wwd:not(.is-in) .wwd-carousel {
+  opacity: 0;
+  transform: translateY(36px) scale(0.985);
+}
+
+.wwd-carousel {
+  transition:
+    opacity 900ms var(--wwd-ease),
+    transform 900ms var(--wwd-ease);
+}
+
+/* ── Story-style step bars ──────────────────────────────── */
+
+.wwd-steps {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.wwd-step {
+  display: grid;
+  gap: 10px;
+  padding: 6px 0 0;
+  border: 0;
+  background: transparent;
+  color: var(--wwd-faint);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.wwd-step-bar {
+  position: relative;
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(11, 13, 16, 0.1);
+  overflow: hidden;
+}
+
+.wwd-step-bar > span {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--wwd-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.wwd-step.is-done .wwd-step-bar > span {
+  transform: scaleX(1);
+  background: rgba(11, 13, 16, 0.35);
+}
+
+.wwd-step.is-active .wwd-step-bar > span {
+  transform: scaleX(1);
+}
+
+.wwd.is-playing .wwd-step.is-active .wwd-step-bar > span {
+  animation: wwd-progress linear both;
+}
+
+.wwd-step-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wwd-step-label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+  transition: background 200ms ease, opacity 200ms ease;
+}
+
+.wwd-step:hover,
+.wwd-step.is-active {
+  color: var(--wwd-ink);
+}
+
+.wwd-step.is-active .wwd-step-label::before {
+  background: var(--wwd-accent);
+  opacity: 1;
+}
+
+.wwd-step:focus-visible {
+  outline: 2px solid var(--wwd-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ── Keyframes ──────────────────────────────────────────── */
+
+@keyframes wwd-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes wwd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wwd-word-in {
+  from {
+    transform: translateY(110%);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes wwd-visual-in {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(0.86) translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+@keyframes wwd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wwd-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .wwd-steps {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .wwd-step-label {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .wwd-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .wwd-controls {
+    justify-content: flex-start;
+  }
+
+  .wwd-counter {
+    margin-right: auto;
+  }
+
+  .wwd-slide {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 14px;
+    min-height: 0;
+    padding: 26px 22px 30px;
+    text-align: center;
+  }
+
+  .wwd-visual img {
+    width: min(56vw, 210px);
+  }
+
+  .wwd-copy {
+    justify-items: center;
+  }
+
+  .wwd-tags {
+    justify-content: center;
+  }
+
+  .wwd-orbit {
+    display: none;
+  }
+
+  .wwd-title {
+    font-size: clamp(1.45rem, 6.4vw, 1.8rem);
+  }
+
+  .wwd-copy p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wwd-slide,
+  .wwd-slide.is-active,
+  .wwd-carousel,
+  .wwd-tilt,
+  .wwd-link,
+  .wwd-link::before,
+  .wwd-arrow {
+    transition: none;
+  }
+
+  .wwd .wwd-slide .wwd-visual,
+  .wwd .wwd-slide .wwd-visual img,
+  .wwd .wwd-slide .wwd-eyebrow,
+  .wwd .wwd-slide .wwd-tags li,
+  .wwd-orbit,
+  .wwd .wwd-slide .wwd-word > span,
+  .wwd .wwd-slide .wwd-copy p,
+  .wwd .wwd-slide .wwd-link,
+  .wwd-counter strong {
+    animation: none !important;
+  }
+
+  .wwd-tilt {
+    transform: none;
+  }
+
+  .wwd-spotlight {
+    display: none;
+  }
+}

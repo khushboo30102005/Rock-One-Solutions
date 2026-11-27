@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import HeroBackgroundScene from "@/components/HeroBackgroundScene";
 import JsonLd from "@/components/JsonLd";
 import ScrollAnimator from "@/components/ScrollAnimator";
@@ -25,6 +24,8 @@ import {
   CheckIcon,
   GlobeIcon,
   InstagramIcon,
+  MailIcon,
+  PhoneIcon,
   WhatsAppIcon,
   nicheIcons,
   platformIcons,
@@ -36,6 +37,11 @@ const PATH = "/creator-partners/";
 const INSTAGRAM_DM = "https://ig.me/m/rockonesolutions";
 const WHATSAPP_CHAT =
   "https://wa.me/918197731627?text=Hi%2C%20I%27m%20a%20creator%20and%20I%27d%20like%20a%20website";
+const WHATSAPP_BRANDS =
+  "https://wa.me/918197731627?text=Hi%2C%20I%27m%20from%20a%20brand%20and%20I%27d%20like%20to%20discuss%20a%20creator%20partnership";
+const CONTACT_EMAIL = "Info@rockonesolutions.com";
+const CONTACT_PHONE = "+91 8197731627";
+const CONTACT_PHONE_HREF = "tel:+918197731627";
 const GSTIN = "29PAVPS8370D1ZI";
 
 export const metadata: Metadata = {
@@ -602,9 +608,14 @@ export default function CreatorPartnersPage() {
                 website placements, with a combined audience of {formatAudienceFloor(reach)}.
               </p>
             </div>
-            <Link className="cp-btn cp-btn-light" href="/contact">
+            <TrackedContactLink
+              className="cp-btn cp-btn-light"
+              href={WHATSAPP_BRANDS}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Discuss a brand partnership <ArrowIcon />
-            </Link>
+            </TrackedContactLink>
           </div>
         </section>
 
@@ -634,7 +645,7 @@ export default function CreatorPartnersPage() {
             <div className="cp-contact-copy">
               <span className="cp-label">(Let&rsquo;s talk)</span>
               <h2 id="cp-contact-title">Ready for a site of your own?</h2>
-              <p>Message us on Instagram or WhatsApp, whichever you use most.</p>
+              <p>Message us on Instagram or WhatsApp, or reach us by email or phone.</p>
             </div>
             <div className="cp-contact-grid">
               <a href={INSTAGRAM_DM} target="_blank" rel="noopener noreferrer">
@@ -646,6 +657,20 @@ export default function CreatorPartnersPage() {
                 <WhatsAppIcon />
                 <span>WhatsApp</span>
                 <strong>Chat with us</strong>
+              </TrackedContactLink>
+              <TrackedContactLink href={`mailto:${CONTACT_EMAIL}`}>
+                <MailIcon />
+                <span>Email</span>
+                {/* <wbr> lets a narrow card wrap after "@" instead of mid-word */}
+                <strong>
+                  {CONTACT_EMAIL.split("@")[0]}@<wbr />
+                  {CONTACT_EMAIL.split("@")[1]}
+                </strong>
+              </TrackedContactLink>
+              <TrackedContactLink href={CONTACT_PHONE_HREF}>
+                <PhoneIcon />
+                <span>Phone</span>
+                <strong>{CONTACT_PHONE}</strong>
               </TrackedContactLink>
             </div>
           </div>
