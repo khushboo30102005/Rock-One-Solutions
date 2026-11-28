@@ -1,8 +1,16 @@
+/** A run of inline text with optional link and formatting. */
+export type BlogInline = { text: string; href?: string; bold?: boolean; italic?: boolean };
+
+/** A list item is either plain text or formatted inline runs. */
+export type BlogListItem = string | BlogInline[];
+
 export type BlogBlock =
   | { type: "p"; text: string }
-  | { type: "rich"; parts: { text: string; href?: string }[] }
+  | { type: "rich"; parts: BlogInline[] }
   | { type: "h2"; text: string }
-  | { type: "ul"; items: string[] }
+  | { type: "h3"; text: string }
+  | { type: "ul"; items: BlogListItem[] }
+  | { type: "ol"; items: BlogListItem[] }
   | { type: "quote"; text: string };
 
 export type BlogFaq = {

@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Fragment, type ReactNode } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import {
   formatPostDate,
-  type BlogBlock
+  type BlogBlock,
+  type BlogInline,
+  type BlogListItem
 } from "../blog-data";
 import { getAllBlogSlugs, getBlogPostBySlug, getAllBlogPosts } from "@/lib/sanity.content";
 import JsonLd from "@/components/JsonLd";
@@ -74,32 +77,59 @@ const arrow = (
   </svg>
 );
 
+function Inline({ parts }: { parts: BlogInline[] }) {
+  return (
+    <>
+      {parts.map((part, index) => {
+        let node: ReactNode = part.text;
+        if (part.italic) node = <em>{node}</em>;
+        if (part.bold) node = <strong>{node}</strong>;
+        return part.href ? (
+          <Link href={part.href} key={index}>
+            {node}
+          </Link>
+        ) : (
+          <Fragment key={index}>{node}</Fragment>
+        );
+      })}
+    </>
+  );
+}
+
+function ListItems({ items }: { items: BlogListItem[] }) {
+  return (
+    <>
+      {items.map((item, index) => (
+        <li key={index}>{typeof item === "string" ? item : <Inline parts={item} />}</li>
+      ))}
+    </>
+  );
+}
+
 function Block({ block }: { block: BlogBlock }) {
   switch (block.type) {
     case "h2":
       return <h2>{block.text}</h2>;
+    case "h3":
+      return <h3>{block.text}</h3>;
     case "ul":
       return (
         <ul>
-          {block.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
+          <ListItems items={block.items} />
         </ul>
+      );
+    case "ol":
+      return (
+        <ol>
+          <ListItems items={block.items} />
+        </ol>
       );
     case "quote":
       return <blockquote>{block.text}</blockquote>;
     case "rich":
       return (
         <p>
-          {block.parts.map((part, index) =>
-            part.href ? (
-              <Link href={part.href} key={`${part.href}-${index}`}>
-                {part.text}
-              </Link>
-            ) : (
-              <span key={`${part.text}-${index}`}>{part.text}</span>
-            )
-          )}
+          <Inline parts={block.parts} />
         </p>
       );
     default:

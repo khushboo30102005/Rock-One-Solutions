@@ -21,6 +21,8 @@ import {
   type BlogPost,
   type BlogBlock,
   type BlogFaq,
+  type BlogInline,
+  type BlogListItem,
 } from "@/app/blog/blog-data";
 import {
   workProjects as localWorkProjects,
@@ -125,8 +127,25 @@ function portableTextToBlocks(blocks: any[]): BlogBlock[] {
 
     const style = block.style || "normal";
 
-    if (style === "h2") {
-      result.push({ type: "h2", text: extractPlainText(block) });
+    // List items: bullet → ul, number → ol. Consecutive items of the same
+    // kind are grouped into one list. Checked before style, since Sanity
+    // list items carry style "normal".
+    if (block.listItem === "bullet" || block.listItem === "number") {
+      const listType = block.listItem === "number" ? "ol" : "ul";
+      const item: BlogListItem = hasFormatting(block)
+        ? buildRichParts(block)
+        : extractPlainText(block);
+      const lastBlock = result[result.length - 1];
+      if (lastBlock && lastBlock.type === listType) {
+        lastBlock.items.push(item);
+      } else {
+        result.push({ type: listType, items: [item] });
+      }
+      continue;
+    }
+
+    if (style === "h2" || style === "h3") {
+      result.push({ type: style, text: extractPlainText(block) });
       continue;
     }
 
@@ -135,25 +154,8 @@ function portableTextToBlocks(blocks: any[]): BlogBlock[] {
       continue;
     }
 
-    // Check if this is a list item
-    if (block.listItem === "bullet") {
-      // Collect consecutive bullet items
-      const lastBlock = result[result.length - 1];
-      if (lastBlock && lastBlock.type === "ul") {
-        lastBlock.items.push(extractPlainText(block));
-      } else {
-        result.push({ type: "ul", items: [extractPlainText(block)] });
-      }
-      continue;
-    }
-
-    // Check for links (rich blocks)
-    const hasLinks = block.markDefs?.some(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (m: any) => m._type === "link"
-    );
-
-    if (hasLinks && block.children) {
+    // Paragraph with bold / italic / links → rich block
+    if (hasFormatting(block)) {
       const parts = buildRichParts(block);
       if (parts.length > 0) {
         result.push({ type: "rich", parts });
@@ -168,6 +170,15 @@ function portableTextToBlocks(blocks: any[]): BlogBlock[] {
   return result;
 }
 
+/** True when any span in the block carries a mark (bold, italic, link). */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function hasFormatting(block: any): boolean {
+  return (block.children || []).some(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (c: any) => Array.isArray(c.marks) && c.marks.length > 0
+  );
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractPlainText(block: any): string {
   if (!block.children) return "";
@@ -176,7 +187,7 @@ function extractPlainText(block: any): string {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function buildRichParts(block: any): { text: string; href?: string }[] {
+function buildRichParts(block: any): BlogInline[] {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const markDefs: Record<string, any> = {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -186,13 +197,13 @@ function buildRichParts(block: any): { text: string; href?: string }[] {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (block.children || []).map((child: any) => {
-    const linkMark = (child.marks || []).find(
-      (m: string) => markDefs[m]?._type === "link"
-    );
-    if (linkMark && markDefs[linkMark]) {
-      return { text: child.text || "", href: markDefs[linkMark].href };
-    }
-    return { text: child.text || "" };
+    const marks: string[] = child.marks || [];
+    const part: BlogInline = { text: child.text || "" };
+    const linkMark = marks.find((m) => markDefs[m]?._type === "link");
+    if (linkMark && markDefs[linkMark].href) part.href = markDefs[linkMark].href;
+    if (marks.includes("strong")) part.bold = true;
+    if (marks.includes("em")) part.italic = true;
+    return part;
   });
 }
 

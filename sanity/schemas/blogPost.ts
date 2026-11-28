@@ -118,6 +118,7 @@ export default defineType({
           styles: [
             { title: "Normal", value: "normal" },
             { title: "H2", value: "h2" },
+            { title: "H3", value: "h3" },
             { title: "Quote", value: "blockquote" },
           ],
           marks: {
@@ -142,7 +143,10 @@ export default defineType({
               },
             ],
           },
-          lists: [{ title: "Bullet", value: "bullet" }],
+          lists: [
+            { title: "Bullet", value: "bullet" },
+            { title: "Numbered", value: "number" },
+          ],
         }),
       ],
     }),
